@@ -5,7 +5,7 @@
   "main": "electron/main.js",
   "scripts": {
     "start": "electron ./electron/main.js",
-    "css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "css": "npx tailwindcss -i ./dist/input.css -o ./dist/output.css --watch"
   },
   "author": "",
   "license": "ISC",

@@ -648,20 +648,6 @@ video {
   }
 }
 
-@media (max-width: 1110px) {
-  .max-\[1110px\]\:flex {
-    display: flex;
-  }
-
-  .max-\[1110px\]\:basis-full {
-    flex-basis: 100%;
-  }
-
-  .max-\[1110px\]\:flex-wrap {
-    flex-wrap: wrap;
-  }
-}
-
 @media (max-width: 1010px) {
   .max-\[1010px\]\:flex {
     display: flex;
