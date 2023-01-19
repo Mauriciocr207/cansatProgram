@@ -1,0 +1,53 @@
+:root {
+    /* colors */
+    --black: #000000;
+    --black_2:#181818;
+    --grey: #656565;
+    --grey_2: #606060;
+    --grey_3: #3a3a3a;
+    --grey_4: #222222;
+
+
+    /* model box */
+    --padding: 10px 20px;
+    --radius: 10px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+aside {
+    min-width: 227px;
+    height: 100vh;
+    background-color: var(--black);
+    padding: var(--padding);
+}
+
+section {
+    width: 100%;
+    height: 100vh;
+    background: var(--black);
+    background: linear-gradient(
+        180deg, 
+        var(--grey_2) 10%,
+        var(--grey_3) 20%,
+        var(--grey_4) 30%,
+        var(--black_2) 50%,
+        var(--black_2) 100%
+    );
+}

@@ -1,0 +1,45 @@
+/* ./your-css-folder/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* colors */
+    --base:#121212;
+}
+
+@layer components {
+    .bg-aside {
+        background-color: black;
+    }
+    .bg-section {
+        background: #a5a5a5;
+        background-image: 
+        linear-gradient(
+        180deg,
+        rgb(0, 0, 0, 0.6) 0,
+        #121212 30%,
+        #121212 100%);
+        transition: background-color 0.5s;
+        
+    }
+
+    .bg-footer {
+        background-color: #181818;
+    }
+
+    .grafic {
+        width: 100%;
+        height: 100%;
+        background-color: #151515;
+        border-radius: 0.5rem; /* 8px */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.5s;
+    }
+
+    .grafic:hover {
+        background-color: #202020;
+    }
+  }
