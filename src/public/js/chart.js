@@ -46,6 +46,8 @@ let option = {
   ]
 };
 
+
+
 let i = 1;
 let id = setInterval(() => {
     const point = [
