@@ -2,8 +2,9 @@ let myChart = echarts.init(
     document.querySelector("#radar"),
     'dark',
     {
-        width: 300,
-        height: 200
+        width: 350,
+        height: 250,
+        renderer: 'svg'
     }
 );
 
@@ -65,7 +66,7 @@ let id = setInterval(() => {
     if(i == 10) clearInterval(id);
     i++;
     
-}, 1500);
+}, 1000);
 myChart.setOption(option);
 
 
