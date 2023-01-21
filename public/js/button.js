@@ -1,17 +1,8 @@
-const { ipcRenderer} = require("electron");
 import { selected } from "./dropdown.js";
-const btn = document.querySelector('.btn');
-
-
-
-btn.addEventListener('click', () => {
-    ipcRenderer.send('wantToOpenConnection', selected.innerText);
-});
-
-ipcRenderer.on("openedConnection", (event, opened) => {
+function openedConnection(event, opened) {
+    const btn = document.querySelector('.btn');
     const classNameAcept = "connect-acept";
     const classNameDenied = "connect-denied";
-    console.log(opened);
     btn.classList.remove(classNameAcept);
     btn.classList.remove(classNameDenied);
     setTimeout(() => {
@@ -23,5 +14,12 @@ ipcRenderer.on("openedConnection", (event, opened) => {
             btn.classList.toggle(classNameDenied);
         }
     }, 300);
-    
+};
+
+// Se envía una solicitud para abrir el puerto
+btn.addEventListener('click', () => {
+    electronApi.send('wantToOpenConnection', selected.innerText);
 });
+
+// Se recibe respuesta de la solicitud wantToOpenConnection
+electronApi.handle('openedConnection', openedConnection);
