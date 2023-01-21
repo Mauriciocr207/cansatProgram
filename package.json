@@ -2,17 +2,18 @@
   "name": "electron",
   "version": "1.0.0",
   "description": "",
-  "main": "electron/main.js",
+  "main": "electron/app.js",
   "scripts": {
-    "start": "electron ./electron/main.js",
-    "css": "npx tailwindcss -i ./dist/input.css -o ./dist/output.css --watch"
+    "start": "electron ./electron/app.js",
+    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/css/styles.css --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "echarts": "^5.4.1",
     "electron": "^22.0.2",
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron-reload": "^2.0.0-alpha.1",
+    "serialport": "^10.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

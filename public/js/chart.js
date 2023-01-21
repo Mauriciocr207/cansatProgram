@@ -62,9 +62,6 @@ let id = setInterval(() => {
     // ];
     option.series[0].data.push(point);
     myChart.setOption(option);
-    console.log(
-        data
-    );
     if(i == 10) clearInterval(id);
     i++;
     
