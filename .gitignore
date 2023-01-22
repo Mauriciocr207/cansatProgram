@@ -1,8 +1,2 @@
 # carpeta de node_modules
 node_modules
-
-# configuracion del css con tailwind
-tailwind.config.js
-
-# Código de electron
-electron
