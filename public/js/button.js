@@ -1,17 +1,15 @@
 import { selected } from "./dropdown.js";
 function openedConnection(event, opened) {
     const btn = document.querySelector('.btn');
-    const classNameAcept = "connect-acept";
-    const classNameDenied = "connect-denied";
-    btn.classList.remove(classNameAcept);
-    btn.classList.remove(classNameDenied);
+    const classAceptDenied = [ "connect-acept", "connect-denied" ];
+    classAceptDenied.forEach( e => btn.classList.remove(e) );
     setTimeout(() => {
         if (opened) {
             console.log("PUERTO ABIERTO");
-            btn.classList.toggle(classNameAcept);
+            btn.classList.toggle(classAceptDenied[0]);
         } else {
             console.log("PUERTO CERRADO");
-            btn.classList.toggle(classNameDenied);
+            btn.classList.toggle(classAceptDenied[1]);
         }
     }, 300);
 };

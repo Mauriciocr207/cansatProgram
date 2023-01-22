@@ -1,4 +1,8 @@
+import { barChart, pushDataBarChart } from "./charts/barChar.js";
 // Se recibe respuesta de la solicitud wantToOpenConnection
 electronApi.handle('Arduino:data', (event, data) => {
-    console.log(typeof data, data);
+    pushDataBarChart(
+        barChart, data["temperatura"], data["time"]
+    );
+    console.log(data["temperatura"])
 });

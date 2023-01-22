@@ -10,6 +10,8 @@ class Connection {
             autoOpen: false
         });
     };
+
+    // Métodos
     createSerialPort(portValue) {
         // Se crea el puerto y los eventos del puerto.
         this.port = new SerialPort({
@@ -19,15 +21,15 @@ class Connection {
         });
         console.log(`Port created on: ${this.port.path}`);
       
-        // //RECEPCION DE DATOS DEL ARDUINO
+        // RECEPCION DE DATOS DEL ARDUINO
         const parse = this.port.pipe(new DelimiterParser({ delimiter: '\n' }));
         parse.on('data', (data) => {
-            let jsonData = data.toString();                     //Convert to string
-                jsonData = jsonData.replace(/\r?\n|\r/g, "");   //remove '\r' from this String
-                jsonData = JSON.stringify(data);                // Convert to JSON
-                jsonData = JSON.parse(data);                    // Convert to JS object
-            BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);
-            console.log(typeof jsonData, jsonData);
+            let jsonData = data.toString();                                         //Convert to string
+                jsonData = jsonData.replace(/\r?\n|\r/g, "");                       //remove '\r' from this String
+                jsonData = JSON.stringify(data);                                    // Convert to JSON
+                jsonData = JSON.parse(data);                                        // Convert to JS object
+            BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
+            console.log(typeof jsonData, jsonData);                                 
         });
     };
 };

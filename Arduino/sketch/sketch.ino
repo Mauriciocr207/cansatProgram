@@ -7,7 +7,7 @@ void setup() {
 
 void loop() {
   doc["time"] = millis();
-  doc["temperatura"] = 1;
+  doc["temperatura"] = random(1,100);
   doc["presion"] = 2;
   doc["humedad"] = 3;
   doc["velocidad"] = 4;
