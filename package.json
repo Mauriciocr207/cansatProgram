@@ -5,7 +5,9 @@
   "main": "electron/app.js",
   "scripts": {
     "start": "electron ./electron/app.js",
-    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/css/styles.css --watch"
+    "build-css": "npx tailwindcss -i ./src/tailwind.css -o ./public/css/styles.css --watch",
+    "parcel-start": "parcel electron/app.js",
+    "parcel-buil": "parcel build electron/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "echarts": "^5.4.1",
     "electron": "^22.1.0",
     "electron-reload": "^2.0.0-alpha.1",
+    "parcel": "^2.8.3",
     "postcss": "^8.4.21",
     "serialport": "^10.5.0",
     "tailwindcss": "^3.2.4"
