@@ -1,8 +1,8 @@
-import { barChart, pushDataBarChart } from "./charts/barChar.js";
+import { presion } from "./charts/Presion.js";
 // Se recibe respuesta de la solicitud wantToOpenConnection
 electronApi.handle('Arduino:data', (event, data) => {
-    pushDataBarChart(
-        barChart, data["temperatura"], data["time"]
+    // 1 - BarChar
+    presion.pushData(
+        data["temperatura"], data["time"]
     );
-    console.log(data["temperatura"])
 });

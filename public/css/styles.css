@@ -759,6 +759,10 @@ video {
   height: 50px;
 }
 
+.h-5\/6 {
+  height: 83.333333%;
+}
+
 .w-screen {
   width: 100vw;
 }
@@ -769,6 +773,14 @@ video {
 
 .w-\[50px\] {
   width: 50px;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
+}
+
+.resize {
+  resize: both;
 }
 
 .grid-cols-\[241px_minmax\(495px\2c 1fr\)\] {
@@ -827,6 +839,11 @@ video {
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .p-\[9px\] {
