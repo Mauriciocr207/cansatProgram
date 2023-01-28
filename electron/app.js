@@ -24,15 +24,8 @@ const createWindow = () => {
     return mainWindow
 };
 
-if(process.env.NODE_ENV !== 'production') {
-    require('electron-reload')(path.join(__dirname, '../public/index.html'), {
-        electron: path.join(__dirname, './app.js')
-    });
-};
-
 app.whenReady().then( () => {
     const win = createWindow();
-    win.webContents.openDevTools();
     const sendData = (channel, data) => win.webContents.send(channel, data);   
     // MacOS
     app.on('activate', () => (BrowserWindow.getAllWindows().length === 0) ? createWindow() : false);
