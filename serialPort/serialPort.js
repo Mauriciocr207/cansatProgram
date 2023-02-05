@@ -1,6 +1,7 @@
 // Conexión Serial
 const { SerialPort, DelimiterParser } = require("serialport");
 const {BrowserWindow} = require('electron');
+const redisClient = require("../electron/redis");
 const baudRateValue = 9600;
 class Connection {
     constructor() {
@@ -29,7 +30,7 @@ class Connection {
                 jsonData = JSON.stringify(data);                                    // Convert to JSON
                 jsonData = JSON.parse(data);                                        // Convert to JS object
             BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
-            console.log(typeof jsonData, jsonData);                                 
+            redisClient.addDataToEvent(jsonData);
         });
     };
 };

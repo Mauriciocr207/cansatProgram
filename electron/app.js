@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain} = require('electron');
 const {Connection} = require('../serialPort/serialPort')
 const path = require('path');
+const redisClient = require('./redis');
 const connection = new Connection();
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -30,7 +31,15 @@ if(process.env.NODE_ENV !== 'production') {
     });
 };
 
-app.whenReady().then( () => {
+
+
+app.whenReady().then(async () => {
+    // create redis connection !
+    await redisClient.connect();
+    await redisClient.flushData();
+
+    console.log(await redisClient.getData());
+
     const win = createWindow();
     win.webContents.openDevTools();
     const sendData = (channel, data) => win.webContents.send(channel, data);   
