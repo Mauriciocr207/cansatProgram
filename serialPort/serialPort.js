@@ -1,7 +1,8 @@
 // Conexión Serial
 const { SerialPort, DelimiterParser } = require("serialport");
-const {BrowserWindow} = require('electron');
+const { BrowserWindow } = require('electron');
 const baudRateValue = 9600;
+
 class Connection {
     constructor() {
         this.port = new SerialPort({
@@ -33,4 +34,4 @@ class Connection {
         });
     };
 };
-module.exports = {Connection};
+module.exports = { Connection };

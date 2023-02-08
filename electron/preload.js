@@ -1,4 +1,4 @@
-const {contextBridge, ipcRenderer} = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 // Se evita la exposición del IpcRenderer al window
 contextBridge.exposeInMainWorld('electronApi', {

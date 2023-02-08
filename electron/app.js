@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain} = require('electron');
-const {Connection} = require('../serialPort/serialPort')
+const { Connection } = require('../serialPort/serialPort')
 const path = require('path');
 const connection = new Connection();
+
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
         backgroundColor: '#121212',
@@ -39,7 +40,7 @@ app.whenReady().then( () => {
     ipcMain.on('wantToOpenConnection', (event, data) => {
         // Se cierra la conexión antes de abrir otra
         if(connection.port.isOpen) {
-            connection.port.close((err) => {
+            connection.port.close( err => {
                 if (err) console.log("Can´t close port");
                 else console.log("Port closed");
             });
