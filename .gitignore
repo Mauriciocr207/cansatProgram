@@ -2,5 +2,7 @@
 node_modules
 # production
 out/
-#configurations development
+# configurations development
 configurations_dev.js
+# forge
+forge.config.js
