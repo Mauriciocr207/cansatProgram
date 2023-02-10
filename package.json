@@ -10,7 +10,7 @@
     "electron": "electron ./electron/app.js",
     "tailwindcss": "npx tailwindcss -i ./src/tailwind.css -o ./public/css/styles.css --watch"
   },
-  "author": "Mauricio",
+  "author": "EEK'",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
