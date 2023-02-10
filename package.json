@@ -21,5 +21,9 @@
     "electron": "^22.1.0",
     "electron-reload": "^2.0.0-alpha.1",
     "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "echarts": "^5.4.1",
+    "serialport": "^10.5.0"
   }
 }
