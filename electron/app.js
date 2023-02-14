@@ -30,6 +30,7 @@ app.whenReady().then( () => {
     const sendData = (channel, data) => win.webContents.send(channel, data);   
     // MacOS
     app.on('activate', () => (BrowserWindow.getAllWindows().length === 0) ? createWindow() : false);
+    // Events
     ipcMain.on('wantToOpenConnection', (event, data) => {
         // Se cierra la conexión antes de abrir otra
         if(connection.port.isOpen) {
