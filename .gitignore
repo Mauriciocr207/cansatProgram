@@ -1,8 +1,5 @@
-# carpeta de node_modules
 node_modules
-# production
-out/
-# configurations development
-configurations_dev.js
-# forge
-forge.config.js
+*.log
+.next
+app
+dist
