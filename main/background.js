@@ -1,6 +1,7 @@
-import { app } from 'electron';
-import serve from 'electron-serve';
+// Módulos de electron
+import { app, ipcMain } from 'electron';
 import { createWindow } from './helpers';
+import serve from 'electron-serve';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -10,23 +11,49 @@ if (isProd) {
   app.setPath('userData', `${app.getPath('userData')} (development)`);
 }
 
-(async () => {
-  await app.whenReady();
+app.whenReady()
+    .then(() => {
+      const win = createWindow();
+      win.webContents.openDevTools();
 
-  const mainWindow = createWindow('main', {
-    width: 1000,
-    height: 600,
-  });
+      if (isProd) {
+        mainWindow.loadURL('app://./home.html');
+      } else {
+        const port = process.argv[2];
+        win.loadURL(`http://localhost:${port}/home`);
+        win.webContents.openDevTools();
+      }
 
-  if (isProd) {
-    await mainWindow.loadURL('app://./home.html');
-  } else {
-    const port = process.argv[2];
-    await mainWindow.loadURL(`http://localhost:${port}/home`);
-    mainWindow.webContents.openDevTools();
-  }
-})();
+      const sendData = (channel, data) => win.webContents.send(channel, data);   
+      // MacOS
+      app.on('activate', () => (BrowserWindow.getAllWindows().length === 0) ? createWindow() : false);
+      // Events
+      ipcMain.on('wantToOpenConnection', (event, data) => {
+          // Se cierra la conexión antes de abrir otra
+          if(connection.port.isOpen) {
+              connection.port.close( err => {
+                  if (err) console.log("Can´t close port");
+                  else console.log("Port closed");
+              });
+          };
 
+          // Se crea puerto serial y se abre la conexión
+          connection.createSerialPort(`${data}`.split(" ").join(""));
+          connection.port.open( function (err) {
+              if (err) {
+                  console.log('Error opening port -> ', err.message);
+                  sendData('openedConnection', false);
+              }
+              else {
+                  console.log("Port connected");
+                  sendData('openedConnection', true);
+              }
+          });
+      });
+    })
+    .catch( err => {
+      console.log(err);
+    })
 app.on('window-all-closed', () => {
   app.quit();
 });
