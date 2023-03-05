@@ -8,7 +8,7 @@ export default function arduinoControls() {
     return (
         <React.Fragment>
           <Head>
-            
+            <title>control over arduino</title>
           </Head>
           <div>
             <h1>HOla mundoooo!!</h1>

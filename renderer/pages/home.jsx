@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {} from "./_app";
+import { Aside } from '../components/Aside';
 
 function Home() {
   return (
@@ -26,6 +27,8 @@ function Home() {
           </Link>
         </div>
       </div>
+      <Aside />
+
     </React.Fragment>
   );
 };
