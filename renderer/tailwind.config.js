@@ -6,7 +6,8 @@ module.exports = {
     './renderer/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
 };

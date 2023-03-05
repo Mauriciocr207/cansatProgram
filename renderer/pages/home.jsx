@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {} from "./_app";
-import { Aside } from '../components/Aside';
+import { SelectPort } from '../components/selectPort';
 
 function Home() {
   return (
@@ -26,9 +26,8 @@ function Home() {
             <a className='btn-blue'>Go to next page</a>
           </Link>
         </div>
+        <SelectPort />
       </div>
-      <Aside />
-
     </React.Fragment>
   );
 };
