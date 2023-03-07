@@ -65,14 +65,10 @@
         --colorText: #c1c3c7;
         --active: #141414;
     }
-    .containerDropdown {
-        width: 100%;
-        position: absolute;
-    }
     .dropdown {
         min-width: 100%;
         position: relative;
-        /* display: flex; */
+        display: flex;
         justify-content: space-between;
         align-items: center;  
         transition: all 0.5s;
@@ -129,14 +125,14 @@
         box-shadow: 0 0.5em 1em rgba(0,0,0,0.2);
         border-radius: 0.5em;
         color: var(--colorText);
-        position: relative;
-        top: 5.4em;
+        position: absolute;
+        top: 2.9em;
         left: 50%;
         width: 100%;
         transform: translate(-50%);
         opacity: 0;
         display: none;
-        transition: 0.5s;
+        transition: all 1.5s;
         z-index: 1;
     }
     .menu li {

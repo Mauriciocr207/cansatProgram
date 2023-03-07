@@ -1,7 +1,8 @@
 // Módulos de electron
-import { app, ipcMain } from 'electron';
-import { createWindow } from './helpers';
+import { app, ipcMain, BrowserWindow } from 'electron';
 import serve from 'electron-serve';
+import { Connection } from '../serialPort/serialPort';
+const connection = new Connection();
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -10,6 +11,25 @@ if (isProd) {
 } else {
   app.setPath('userData', `${app.getPath('userData')} (development)`);
 }
+
+function createWindow(){
+    const mainWindow = new BrowserWindow({
+        backgroundColor: '#121212',
+        width: 1500,
+        height: 800,
+        titleBarStyle: 'hidden',
+        titleBarOverlay: {
+            color: '#000000',
+            symbolColor: '#ffffff',
+        },
+        webPreferences: {
+            // preload: path.join(__dirname, '../app/preload.js'),
+            contextIsolation: false,
+            nodeIntegration: true,
+        }
+    });
+    return mainWindow
+  };
 
 app.whenReady()
     .then(() => {

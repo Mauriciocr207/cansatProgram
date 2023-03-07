@@ -2,8 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {} from "./_app";
-import { SelectPort } from '../components/selectPort';
-import { globalPort } from '../components/selectPort';
+import { SelectConnectPort } from '../components/selectConnectPort';
 
 function Home() {
   return (
@@ -27,7 +26,7 @@ function Home() {
             <a className='btn-blue'>Go to next page</a>
           </Link>
         </div>
-        <SelectPort />
+        <SelectConnectPort />
       </div>
     </React.Fragment>
   );
