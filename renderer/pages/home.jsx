@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import {} from "./_app";
 import { SelectPort } from '../components/selectPort';
+import { globalPort } from '../components/selectPort';
 
 function Home() {
   return (
@@ -10,7 +11,7 @@ function Home() {
       <Head>
         <title>Home - Nextron (with-javascript)</title>
       </Head>
-      <div className='bg-sky-900 h-[100vh] text-white'>
+      <div className=' bg-sky-900 h-[100vh] text-white'>
         <div className='grid grid-col-1 text-2xl w-full text-center'>
           <img className='ml-auto mr-auto' src='/images/logo.png' />
           <span>⚡ Electron ⚡</span>
