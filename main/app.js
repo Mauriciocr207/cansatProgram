@@ -2,7 +2,7 @@
 import { app, ipcMain, BrowserWindow } from 'electron';
 import serve from 'electron-serve';
 import { Connection } from '../serialPort/serialPort';
-const connection = new Connection();
+const connections = {}
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -49,26 +49,38 @@ app.whenReady()
       app.on('activate', () => (BrowserWindow.getAllWindows().length === 0) ? createWindow() : false);
       // Events
       ipcMain.on('wantToOpenConnection', (event, data) => {
+        const dataPort = `${data.port}`.split(" ").join(""); // Se limpia el string el puerto de espacios
+        if( !connections.hasOwnProperty( `connection_${data.id}` ) ) connections[`connection_${data.id}`] = new Connection(dataPort);
+        const connection = connections[`connection_${data.id}`];
           // Se cierra la conexión antes de abrir otra
           if(connection.port.isOpen) {
               connection.port.close( err => {
                   if (err) console.log("Can´t close port");
-                  else console.log("Port closed");
+                  else {
+                    console.log("Port closed");
+                    sendData(`openedConnection_${data.id}`, false);
+                  }
               });
           };
+  
+          console.log(
+            connection.port.path == dataPort,
+            connection.port.path,
+            dataPort
+          )
 
           // Se crea puerto serial y se abre la conexión
-          connection.createSerialPort(`${data}`.split(" ").join(""));
-          connection.port.open( function (err) {
-              if (err) {
-                  console.log('Error opening port -> ', err.message);
-                  sendData('openedConnection', false);
-              }
-              else {
-                  console.log("Port connected");
-                  sendData('openedConnection', true);
-              }
-          });
+          connection.createSerialPort(dataPort);
+            connection.port.open( function (err) {
+                if (err) {
+                    console.log(`Error opening port on connection_${data.id} ->`, err.message);
+                    sendData(`openedConnection_${data.id}`, false);
+                }
+                else {
+                    console.log("Port connected");
+                    sendData(`openedConnection_${data.id}`, true);
+                }
+            });
       });
     })
     .catch( err => {

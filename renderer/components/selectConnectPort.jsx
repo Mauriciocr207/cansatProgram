@@ -2,14 +2,12 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import { ConnectionIcon } from "./connectionIcon";
 
-export function SelectConnectPort() {
+export function SelectConnectPort({id}) {
   useEffect(()=> {
-    console.log(
-      ipcRenderer.on('openedConnection', openedConnection)
-    )
+    ipcRenderer.on(`openedConnection_${id}`, openedConnection);
   }, [])
 
-  const [textSelected, setTextSelected] = useState("COM1");
+  const [textSelected, setTextSelected] = useState("COM 1");
   const [classSelect, setClassSelect] = useState("select");
   const [classCaret, setClassCaret] = useState("caret");
   const [classMenu, setClassMenu] = useState("menu");
@@ -20,7 +18,7 @@ export function SelectConnectPort() {
   const [childsMenu, setChildsMenu] = useState(createChildsMenu(1));
   function createChildsMenu(numberPort) {
     return arr.map((e) => {
-      const port = "COM" + e;
+      const port = "COM " + e;
       return (
         <li
           className={e == numberPort ? "active" : "non-active"}
@@ -67,10 +65,10 @@ export function SelectConnectPort() {
  
   // Se envía una solicitud para abrir el puerto
   function wantToOpenConnection() {
-    ipcRenderer.send("wantToOpenConnection", textSelected);
+    ipcRenderer.send("wantToOpenConnection", {port: textSelected, id: id});
   }
-  // Se recibe respuesta de la solicitud wantToOpenConnection
-  // ipcRenderer.on("openedConnection", openedConnection);
+
+
 
   return (
     <>
@@ -82,9 +80,6 @@ export function SelectConnectPort() {
         grid-cols-1
         gap-[20px]
         justify-items-center
-        absolute
-        top-[200px]
-        left-[100px]
       "
       >
         <button

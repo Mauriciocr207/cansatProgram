@@ -4,9 +4,9 @@ import { BrowserWindow } from 'electron';
 const baudRateValue = 9600;
 
 export class Connection {
-    constructor() {
+    constructor(port) {
         this.port = new SerialPort({
-            path: 'COM1',
+            path: port,
             baudRate: baudRateValue,
             autoOpen: false
         });

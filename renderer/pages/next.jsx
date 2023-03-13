@@ -8,7 +8,7 @@ function Next() {
       <Head>
         <title>Next - Nextron (with-javascript)</title>
       </Head>
-      <div>
+      <div className='bg-sky-900 h-[100vh] text-white'>
         <p>
           ⚡ Electron + Next.js ⚡ -
           <Link href="/home">
