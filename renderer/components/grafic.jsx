@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { useEffect } from "react";
 
-export function Grafic({onMouseOver}) {
+export function Grafic({onMouseOver, key}) {
     useEffect( () => {
         ipcRenderer.on('Arduino:data', (event, data) => {
             console.log(data);
@@ -11,7 +11,7 @@ export function Grafic({onMouseOver}) {
 
     return(
         <>
-            <div className="grafic row-span-1 p-[30px]" onMouseOver={onMouseOver}>
+            <div className="grafic row-span-1 p-[30px]" key={key} onMouseOver={onMouseOver}>
                 <h1 className="text-center">
                     
                 </h1>
