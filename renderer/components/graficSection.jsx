@@ -13,7 +13,7 @@ export function GraficSection() {
   function createGrafics() {
     return colors.map( color => {
         return (
-            Grafic
+            <Grafic ></Grafic>
           );
 
     }) 
