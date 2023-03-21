@@ -2,14 +2,14 @@ import { Grafic } from '../components/grafic';
 import { useState } from 'react';
 export function PanelSection() {
     const colors = [
-        "#F52E00",
-        '#4318F5',
-        '#F59200',
-        '#18F5A7',
-        '#F5DB0C',
-        '#F87030'
+        "bg-[#F52E00]",
+        "bg-[#4318F5]",
+        "bg-[#F59200]",
+        "bg-[#18F5A7]",
+        "bg-[#F5DB0C]",
+        "bg-[#F87030]"
       ]
-    const [sectionBgColor, setSectionBgColor] = useState('#ffffff');
+    const [sectionBgColor, setSectionBgColor] = useState("bg-[#ffffff]");
 
     return (
         <>
@@ -22,7 +22,7 @@ export function PanelSection() {
                 grid
                 grid-rows-[50px_1fr]
                 grid-cols-1 
-                bg-[${sectionBgColor}]
+                ${sectionBgColor}
                 `
           }
           >
@@ -48,13 +48,11 @@ export function PanelSection() {
               '>
                     {
                       colors.map( color => <Grafic key={color} onMouseOver={ () => {
-                            console.log(color);
                             setSectionBgColor(color);
                         }}/>
                       )
                     }                    
                 </div>
-              
             </div>
         </>
     )

@@ -44,7 +44,6 @@ function Home() {
           {/* Section -> Grafics */}
           <section>
             <PanelSection />
-
           </section>
 
           {/* Footer -> Messages to Arduino */}
