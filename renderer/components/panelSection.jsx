@@ -16,9 +16,6 @@ export function PanelSection() {
         <>
             <div className={
               ` bg-section
-                row-span-1
-                col-span-1 
-                overflow-y-auto
                 h-full 
                 grid
                 grid-rows-[50px_1fr]
@@ -31,19 +28,19 @@ export function PanelSection() {
               <div className='
                   px-[32px] 
                   py-[24px]
-                  grid 
+                  grid
                   grid-rows-2 
                   grid-cols-3 
                   gap-x-[24px] 
-                  gap-y-[12px]
-                  overflow-y-auto 
+                  gap-y-[12px]                  
+                  overflow-y-auto
+                  max-[1400px]:grid
+                  max-[1400px]:grid-rows-[300px_300px_300px]
+                  max-[1400px]:grid-cols-2
                   max-[1010px]:flex
                   max-[1010px]:basis-full
                   max-[1010px]:flex-wrap
                   max-[1010px]:items-center
-                  max-[1400px]:grid
-                  max-[1400px]:grid-rows-[300px_300px_300px]
-                  max-[1400px]:grid-cols-2
                   scroll
               '>
                     {
@@ -52,7 +49,7 @@ export function PanelSection() {
                             setSectionBgColor(color);
                         }} Children={
                           <>
-                            
+                            <PresionChart/>
                           </>
                         }/>
                       )

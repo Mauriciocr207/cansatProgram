@@ -46,6 +46,6 @@ export function PresionChart() {
       }
 
     return <>
-        <div className='bg-white'></div>
+        <Line data={data} options={options}/>
     </>
 }

@@ -41,13 +41,19 @@ function Home() {
           </aside>
 
           {/* Section -> Grafics */}
-          <section>
+          <section className='
+            row-span-1
+            col-span-1 
+            overflow-y-auto
+          '>
             <PanelSection />
           </section>
 
           {/* Footer -> Messages to Arduino */}
-          <footer className='bg-footer 
-            col-span-2'>
+          <footer className='
+            bg-footer 
+            col-span-2'
+          >
 
           </footer>
 
