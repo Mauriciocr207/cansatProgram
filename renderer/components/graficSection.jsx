@@ -1,4 +1,5 @@
 import { Grafic } from "./grafic";
+import Page from "./grafics/presion";
 
 export function GraficSection() {
     const colors = [
@@ -13,7 +14,9 @@ export function GraficSection() {
   function createGrafics() {
     return colors.map( color => {
         return (
-            <Grafic ></Grafic>
+            <Grafic >
+              <Page/>
+            </Grafic>
           );
 
     }) 

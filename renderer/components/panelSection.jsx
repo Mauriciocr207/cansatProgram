@@ -1,4 +1,5 @@
 import { Grafic } from '../components/grafic';
+import { PresionChart } from './grafics/presion';
 import { useState } from 'react';
 export function PanelSection() {
     const colors = [
@@ -35,21 +36,25 @@ export function PanelSection() {
                   grid-cols-3 
                   gap-x-[24px] 
                   gap-y-[12px]
-                  overflow-y-scroll
-                  max-[1400px]:grid
-                  max-[1400px]:grid-rows-[300px_300px_300px]
-                  max-[1400px]:grid-cols-2
+                  overflow-y-auto 
                   max-[1010px]:flex
                   max-[1010px]:basis-full
                   max-[1010px]:flex-wrap
                   max-[1010px]:items-center
+                  max-[1400px]:grid
+                  max-[1400px]:grid-rows-[300px_300px_300px]
+                  max-[1400px]:grid-cols-2
                   scroll
-                  
               '>
                     {
-                      colors.map( color => <Grafic key={color} onMouseOver={ () => {
+                      colors.map( color => <Grafic
+                        key={color} onMouseOver={ () => {
                             setSectionBgColor(color);
-                        }}/>
+                        }} Children={
+                          <>
+                            
+                          </>
+                        }/>
                       )
                     }                    
                 </div>
