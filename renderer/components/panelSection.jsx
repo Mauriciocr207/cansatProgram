@@ -1,15 +1,17 @@
 import { Grafic } from '../components/grafic';
-import { PresionChart } from './grafics/presion';
+import { Presion } from './grafics/presion';
 import { useState } from 'react';
+import { Temperatura } from './grafics/temperatura';
+import { Velocity } from './grafics/Velocity';
 export function PanelSection() {
-    const colors = [
-        "bg-[#F52E00]",
-        "bg-[#4318F5]",
-        "bg-[#F59200]",
-        "bg-[#18F5A7]",
-        "bg-[#F5DB0C]",
-        "bg-[#F87030]"
-      ]
+    const Grafics = [
+      { grafic: <Presion/>, color: "bg-[#F52E00]" },
+      { grafic: <Velocity/>, color: "bg-[#4318F5]"},
+      { grafic: <Temperatura/>, color: "bg-[#F59200]"},
+      { grafic: <Velocity/>, color: "bg-[#18F5A7]" },
+      { grafic: <Presion/>, color: "bg-[#F5DB0C]" },
+      { grafic: <Presion/>, color: "bg-[#F87030]" }
+    ];
     const [sectionBgColor, setSectionBgColor] = useState("bg-[#ffffff]");
 
     return (
@@ -44,13 +46,11 @@ export function PanelSection() {
                   scroll
               '>
                     {
-                      colors.map( color => <Grafic
-                        key={color} onMouseOver={ () => {
-                            setSectionBgColor(color);
+                      Grafics.map( e => <Grafic
+                        key={e.color} onMouseOver={ () => {
+                            setSectionBgColor(e.color);
                         }} Children={
-                          <>
-                            <PresionChart/>
-                          </>
+                          e.grafic
                         }/>
                       )
                     }                    
