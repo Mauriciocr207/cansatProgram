@@ -2,108 +2,189 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import { ConnectionIcon } from "./connectionIcon";
 
-export function SelectConnectPort({id}) {
-  useEffect(()=> {
-    ipcRenderer.on(`openedConnection_${id}`, openedConnection);
-  }, [])
+export function SelectConnectPort({ id }) {
+  const clases = {
+    button: `
+      
+      w-[50px] 
+      rounded-full 
+      p-[9px] 
+      backdrop-blur-md
+      transition-color
+      duration-500
+    `,
+    select: `
+      SELECT
+  
+      bg-primario 
+      border-primario
+      hover:bg-secundario
+  
+      w-full
+      h-full
+      flex
+      place-content-between
+      items-center
+      border-[3px]
+      border-solid
+      rounded-xl
+      transition-colors
+      duration-300
+      p-[0.6em]
+      cursor-pointer
+    `,
+    menu: `
+      MENU
+      bg-secundario
+      border-secundario
+      w-full
+      h-[460px]
+      list-none
+      p-[0.3em]
+      rounded-xl
+      absolute
+      top-[3.1em]
+    `,
+    caret: `
+      CARET
+  
+      w-0
+      h-0
+      border-t-[6px]
+      border-t-[#eee]
+      border-r-[5px]
+      border-r-[rgb(0,0,0,0)]
+      border-l-[5px]
+      border-l-[rgb(0,0,0,0)]
+      transition-all
+      duration-300
+    `,
+    ports: `
+      py-[0.3em]
+      px-[0.9em]
+      my-[0.3em]
+      border-[3px]
+      border-solid
+      border-primario
+      hover:border-liHover
+      cursor-pointer
+      transition-color
+      duration-300
+    `,
+    containerDropdown: `
+      CONTAINERDROPDOWN
+            
+            
+      w-full
+      relative
+      h-[40px]
+    `,
+    dropdown: `
+      DROPDOWN
+            
+      w-full
+      h-full
+      
+      `,
+  };
+  const [selectedPort, setSelectedPort] = useState("COM 1"); // Puerto inicial
+  const [select, setSelect] = useState({
+    clicked: false,
+    classMenu: "",
+    classCaret: "toTop",
+  }); //  Control de click en Select
+  const [btnConnection, setbtnConnection] = useState(
+    "bg-[rgb(255,255,255,0.25)]"
+  ); //  Estilos iniciales de btnConnection
 
-  const [textSelected, setTextSelected] = useState("COM 1");
-  const [classSelect, setClassSelect] = useState("select");
-  const [classCaret, setClassCaret] = useState("caret");
-  const [classMenu, setClassMenu] = useState("menu");
-  const [classButton, setClassButton] = useState(" ");
-
-  const arr = [];
-  for (let i = 1; i <= 10; i++) arr.push(i);
-  const [childsMenu, setChildsMenu] = useState(createChildsMenu(1));
-  function createChildsMenu(numberPort) {
-    return arr.map((e) => {
-      const port = "COM " + e;
-      return (
-        <li
-          className={e == numberPort ? "active" : "non-active"}
-          onClick={() => {
-            setTextSelected(port);
-            setClassSelect("select");
-            setClassCaret("caret");
-            setClassMenu("menu");
-            setChildsMenu(createChildsMenu(e));
-          }}
-          key={port}
-        >
-          {port}
-        </li>
-      );
-    });
-  }
+  // Manejando click en Select
   function handleSelectClick() {
-    if (classSelect == "select") {
-      setClassSelect(classSelect + " select-clicked");
-      setClassCaret(classCaret + " caret-rotate");
-      setClassMenu(classMenu + " menu-open");
-    } else {
-      setClassSelect("select");
-      setClassCaret("caret");
-      setClassMenu("menu");
-    }
+    select.clicked
+      ? setSelect({
+          ...select,
+          clicked: false,
+          classCaret: "rotate",
+          classMenu: "block",
+        })
+      : setSelect({
+          ...select,
+          clicked: true,
+          classCaret: "noRotate",
+          classMenu: "hidden",
+        });
   }
-  // Button
-  function openedConnection(event, opened) {
-    const classAceptDenied = ["connect-acept", "connect-denied"];
-    setClassButton(" ");
 
+  // Creación de elementos puertos (elementos li)
+  const portNames = [];
+  for (let i = 1; i <= 10; i++) portNames.push(`COM ${i}`);
+  const [ports, setPorts] = useState(createPorts("COM 1"));
+  function createPorts(port) {
+    return portNames.map((portName) => (
+      <>
+        <li
+          className={`${clases.ports} ${portName == port ? "bg-active" : ""}`}
+          onClick={() => {
+            setSelectedPort(portName);
+            setPorts(createPorts(portName));
+          }}
+          key={portName}
+        >
+          {portName}
+        </li>
+      </>
+    ));
+  }
+
+  // Se envía la solicitud para abrir el puerto
+  function wantToOpenConnection() {
+    ipcRenderer.send("wantToOpenConnection", { port: selectedPort, id: id });
+  }
+
+  // Se recibe la respuesta de la solicitud
+  useEffect(() => {
+    ipcRenderer.on(`openedConnection_${id}`, openedConnection);
+  }, []);
+
+  // Se aplican los estilos al botón en respuesta a la solicitud
+  function openedConnection(event, opened) {
+    setbtnConnection("bg-[rgb(255,255,255,0.25)]");
     setTimeout(() => {
       if (opened) {
         console.log("PUERTO ABIERTO");
-        setClassButton(classAceptDenied[0]);
+        setbtnConnection("acepted");
       } else {
         console.log("PUERTO CERRADO");
-        setClassButton(classAceptDenied[1]);
+        setbtnConnection("denied");
       }
-    }, 300);
-  };
- 
-  // Se envía una solicitud para abrir el puerto
-  function wantToOpenConnection() {
-    ipcRenderer.send("wantToOpenConnection", {port: textSelected, id: id});
+    }, 500);
   }
-
-
 
   return (
     <>
       <div
         className="
-        w-[200px]
+        w-full
         grid
-        grid-rows-[50px_1fr]
+        grid-rows-[50px_50px]
         grid-cols-1
-        gap-[20px]
-        justify-items-center
+        gap-[15px]
+        place-items-center
       "
       >
         <button
-          className={
-          `btn
-           w-[50px] 
-           h-[50px] 
-           rounded-full 
-           mb-[20px] 
-           p-[9px] 
-           ${classButton}`
-          }
+          className={` ${clases.button} ${btnConnection} `}
           onClick={wantToOpenConnection}
         >
           <ConnectionIcon />
         </button>
-        <div className="w-full relative">
-          <div className="dropdown w-full">
-            <div className={classSelect} onClick={handleSelectClick}>
-              <span className="selected">{textSelected}</span>
-              <div className={classCaret}></div>
+        <div className={clases.containerDropdown}>
+          <div className={clases.dropdown}>
+            <div className={`${clases.select} `} onClick={handleSelectClick}>
+              <span> {selectedPort} </span>
+              <div className={`${clases.caret} ${select.classCaret}`}></div>
             </div>
           </div>
-          <ul className={classMenu}>{childsMenu}</ul>
+          <ul className={`${clases.menu} ${select.classMenu}`}> {ports} </ul>
         </div>
       </div>
     </>

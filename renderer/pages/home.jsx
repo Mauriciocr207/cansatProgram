@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import {} from "./_app";
 import { SelectConnectPort } from '../components/selectConnectPort';
@@ -37,7 +37,7 @@ function Home() {
               p-[20px]
           '>
             <h1>Connection</h1>
-            <SelectConnectPort id={1}/>
+            {/* <SelectConnectPort id={1}/> */}
           </aside>
 
           {/* Section -> Grafics */}

@@ -6,9 +6,9 @@ import { Velocity } from './grafics/Velocity';
 export function PanelSection() {
     const Grafics = [
       { grafic: <Presion/>, color: "bg-[#F52E00]" },
-      { grafic: <Velocity/>, color: "bg-[#4318F5]"},
       { grafic: <Temperatura/>, color: "bg-[#F59200]"},
-      { grafic: <Velocity/>, color: "bg-[#18F5A7]" },
+      { grafic: <Presion/>, color: "bg-[#4318F5]"},
+      { grafic: <Temperatura/>, color: "bg-[#18F5A7]" },
       { grafic: <Presion/>, color: "bg-[#F5DB0C]" },
       { grafic: <Presion/>, color: "bg-[#F87030]" }
     ];
@@ -22,6 +22,8 @@ export function PanelSection() {
                 grid
                 grid-rows-[50px_1fr]
                 grid-cols-1 
+                transition-color
+                duration-500
                 ${sectionBgColor}
                 `
           }
