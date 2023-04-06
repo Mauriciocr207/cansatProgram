@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import {} from "./_app";
 import { SelectConnectPort } from '../components/selectConnectPort';
 import { PanelSection } from '../components/panelSection';
 
@@ -9,7 +8,8 @@ function Home() {
     <React.Fragment>
       <Head>
         <title>Home - Nextron (with-javascript)</title>
-      </Head>
+      </Head>      
+      <body>
       <div className='
             body
             w-screen 
@@ -37,7 +37,7 @@ function Home() {
               p-[20px]
           '>
             <h1>Connection</h1>
-            {/* <SelectConnectPort id={1}/> */}
+            <SelectConnectPort id={1}/>
           </aside>
 
           {/* Section -> Grafics */}
@@ -59,6 +59,7 @@ function Home() {
 
         </div>
       </div>
+      </body>
     </React.Fragment>
   );
 };

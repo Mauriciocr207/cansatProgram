@@ -20,7 +20,8 @@ module.exports = {
       
 
       // DARK MODE
-    }
+    },
+    extend: {},
   },
   darkMode: "class",
   plugins: [],

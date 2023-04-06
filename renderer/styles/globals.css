@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-
+    body {
+        display: block;
+    }
 }
 
 @layer components {

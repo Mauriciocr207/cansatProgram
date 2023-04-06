@@ -3,7 +3,6 @@ module.exports = {
       Object.assign(defaultConfig, {
         entry: {
           background: './main/app.js',
-          // preload: './main/preload.js',
         },
       }),
   };

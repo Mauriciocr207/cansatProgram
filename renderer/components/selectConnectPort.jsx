@@ -122,12 +122,12 @@ export function SelectConnectPort({ id }) {
     return portNames.map((portName) => (
       <>
         <li
+          key={portName}
           className={`${clases.ports} ${portName == port ? "bg-active" : ""}`}
           onClick={() => {
             setSelectedPort(portName);
             setPorts(createPorts(portName));
           }}
-          key={portName}
         >
           {portName}
         </li>
