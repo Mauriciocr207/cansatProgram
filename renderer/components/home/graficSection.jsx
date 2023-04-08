@@ -1,5 +1,5 @@
-import { Grafic } from "./grafic";
-import Page from "./grafics/presion";
+import { Grafic } from "../home/grafic";
+import Page from "../home/grafics/presion";
 
 export function GraficSection() {
     const colors = [

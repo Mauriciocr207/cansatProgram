@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { ConnectionIcon } from "./connectionIcon";
 
 export function SelectConnectPort({ id }) {
-  const clases = {
+  // Clases css
+  const classes = {
     button: `
-      
       w-[50px] 
       rounded-full 
       p-[9px] 
@@ -14,12 +14,12 @@ export function SelectConnectPort({ id }) {
       duration-500
     `,
     select: `
-      SELECT
-  
-      bg-primario 
-      border-primario
-      hover:bg-secundario
-  
+      bg-blue
+      border-blueSky
+      hover:bg-blue3
+      dark:bg-blackDark-3
+      dark:border-greyDark-1
+      dark:hover:bg-blackDark-4
       w-full
       h-full
       flex
@@ -34,20 +34,20 @@ export function SelectConnectPort({ id }) {
       cursor-pointer
     `,
     menu: `
-      MENU
-      bg-secundario
-      border-secundario
+      bg-blue
+      border-blueSky
+      dark:bg-blackDark-3
+      dark:border-greyDark-1
       w-full
-      h-[460px]
+      h-[410px]
       list-none
-      p-[0.3em]
+      p-[0.5em]
+      border-[3px]
       rounded-xl
       absolute
       top-[3.1em]
     `,
     caret: `
-      CARET
-  
       w-0
       h-0
       border-t-[6px]
@@ -60,60 +60,59 @@ export function SelectConnectPort({ id }) {
       duration-300
     `,
     ports: `
+      bg-blue2
+      hover:bg-blueSky
+      hover:text-black
+      dark:bg-blackDark-2
+      dark:hover:bg-blackDark-4
+      dark:hover:text-white
       py-[0.3em]
       px-[0.9em]
       my-[0.3em]
-      border-[3px]
-      border-solid
-      border-primario
-      hover:border-liHover
+      rounded-[5px]
       cursor-pointer
       transition-color
       duration-300
     `,
-    containerDropdown: `
-      CONTAINERDROPDOWN
-            
-            
+    containerDropdown: `     
       w-full
       relative
       h-[40px]
     `,
     dropdown: `
-      DROPDOWN
-            
       w-full
       h-full
-      
       `,
   };
-  const [selectedPort, setSelectedPort] = useState("COM 1"); // Puerto inicial
+  // Puerto seleccionado
+  const [selectedPort, setSelectedPort] = useState("COM 1"); // Puerto inicial "COM 1"
+  // handleClick en select
   const [select, setSelect] = useState({
-    clicked: false,
-    classMenu: "",
+    clicked: true,
+    classMenu: "hidden",
     classCaret: "toTop",
-  }); //  Control de click en Select
+  });
+  // Función del handleClick en select
+  function handleSelectClick() {
+    setSelect({ ...select, clicked: !select.clicked });
+    select.clicked ? 
+      setSelect({
+        ...select,
+        clicked: false,
+        classCaret: "rotate",
+        classMenu: "block",
+      }) :
+      setSelect({
+        ...select,
+        clicked: true,
+        classCaret: "noRotate",
+        classMenu: "hidden",
+      });
+  }
+  // Cambios de estilo css en botón al llamar una conexión
   const [btnConnection, setbtnConnection] = useState(
     "bg-[rgb(255,255,255,0.25)]"
-  ); //  Estilos iniciales de btnConnection
-
-  // Manejando click en Select
-  function handleSelectClick() {
-    select.clicked
-      ? setSelect({
-          ...select,
-          clicked: false,
-          classCaret: "rotate",
-          classMenu: "block",
-        })
-      : setSelect({
-          ...select,
-          clicked: true,
-          classCaret: "noRotate",
-          classMenu: "hidden",
-        });
-  }
-
+  );
   // Creación de elementos puertos (elementos li)
   const portNames = [];
   for (let i = 1; i <= 10; i++) portNames.push(`COM ${i}`);
@@ -123,7 +122,7 @@ export function SelectConnectPort({ id }) {
       <>
         <li
           key={portName}
-          className={`${clases.ports} ${portName == port ? "bg-active" : ""}`}
+          className={`${classes.ports} ${portName == port ? "bg-blue3 dark:bg-greyDark-1" : ""}`}
           onClick={() => {
             setSelectedPort(portName);
             setPorts(createPorts(portName));
@@ -134,17 +133,14 @@ export function SelectConnectPort({ id }) {
       </>
     ));
   }
-
   // Se envía la solicitud para abrir el puerto
   function wantToOpenConnection() {
     ipcRenderer.send("wantToOpenConnection", { port: selectedPort, id: id });
   }
-
   // Se recibe la respuesta de la solicitud
   useEffect(() => {
     ipcRenderer.on(`openedConnection_${id}`, openedConnection);
   }, []);
-
   // Se aplican los estilos al botón en respuesta a la solicitud
   function openedConnection(event, opened) {
     setbtnConnection("bg-[rgb(255,255,255,0.25)]");
@@ -158,7 +154,6 @@ export function SelectConnectPort({ id }) {
       }
     }, 500);
   }
-
   return (
     <>
       <div
@@ -172,19 +167,19 @@ export function SelectConnectPort({ id }) {
       "
       >
         <button
-          className={` ${clases.button} ${btnConnection} `}
+          className={` ${classes.button} ${btnConnection} `}
           onClick={wantToOpenConnection}
         >
           <ConnectionIcon />
         </button>
-        <div className={clases.containerDropdown}>
-          <div className={clases.dropdown}>
-            <div className={`${clases.select} `} onClick={handleSelectClick}>
+        <div className={classes.containerDropdown}>
+          <div className={classes.dropdown}>
+            <div className={`${classes.select} `} onClick={handleSelectClick}>
               <span> {selectedPort} </span>
-              <div className={`${clases.caret} ${select.classCaret}`}></div>
+              <div className={`${classes.caret} ${select.classCaret}`}></div>
             </div>
           </div>
-          <ul className={`${clases.menu} ${select.classMenu}`}> {ports} </ul>
+          <ul className={`${classes.menu} ${select.classMenu}`}> {ports} </ul>
         </div>
       </div>
     </>

@@ -1,8 +1,8 @@
-import { Grafic } from '../components/grafic';
-import { Presion } from './grafics/presion';
 import { useState } from 'react';
-import { Temperatura } from './grafics/temperatura';
-import { Velocity } from './grafics/Velocity';
+import { Grafic } from '../home/grafic';
+import { Presion } from '../home/grafics/presion';
+import { Temperatura } from '../home/grafics/temperatura';
+import { Velocity } from '../home/grafics/Velocity';
 export function PanelSection() {
     const Grafics = [
       { grafic: <Presion/>, color: "bg-[#F52E00]" },
@@ -16,15 +16,24 @@ export function PanelSection() {
 
     return (
         <>
+          <div className={`
+            bg-sectionDark
+            w-full 
+            h-full
+            ${sectionBgColor.toString()}
+            transition-color
+            duration-500
+          `}>
             <div className={
-              ` bg-section
+              ` bg-white
+                dark:bg-[rgb(0,0,0,0)]
                 h-full 
                 grid
                 grid-rows-[50px_1fr]
                 grid-cols-1 
                 transition-color
-                duration-500
-                ${sectionBgColor}
+                duration-300
+                
                 `
           }
           >
@@ -50,14 +59,16 @@ export function PanelSection() {
                     {
                       Grafics.map( e => <Grafic
                         key={e.color} onMouseOver={ () => {
+
                             setSectionBgColor(e.color);
                         }} Children={
                           e.grafic
                         }/>
                       )
                     }                    
-                </div>
+              </div>
             </div>
+          </div>
         </>
     )
 

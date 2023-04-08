@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { Children, useEffect } from "react";
+import { useEffect } from "react";
 
 export function Grafic({onMouseOver, Children}) {
     useEffect( () => {
@@ -11,11 +11,7 @@ export function Grafic({onMouseOver, Children}) {
 
     return(
         <>
-            <div className="
-                grafic 
-                
-
-                            
+            <div className="         
                 row-span-1 
                 p-[30px]
                 w-full 

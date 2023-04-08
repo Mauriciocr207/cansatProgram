@@ -9,14 +9,20 @@
 }
 
 @layer components {
-    .bg-section {
+    .bg-sectionLight {
         background-image:
             linear-gradient(180deg,
-                rgb(0, 0, 0, 0.6) 0,
+                rgb(255, 255, 255) 0,
+                #ffffff 30%,
+                #ffffff 100%);
+    }
+    .bg-sectionDark {
+        background-image:
+            linear-gradient(180deg,
+                rgb(0, 0, 0, 0.5) 0,
                 #121212 30%,
                 #121212 100%);
     }
-
     .scroll::-webkit-scrollbar {
         width: 5px;
         background-color: rgba(50, 50, 50, 0.442);

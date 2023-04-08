@@ -1,21 +1,18 @@
 import React from 'react';
 import Head from 'next/head';
-import { SelectConnectPort } from '../components/selectConnectPort';
-import { PanelSection } from '../components/panelSection';
+import { SelectConnectPort } from '../components/home/selectConnectPort';
+import { PanelSection } from '../components/home/panelSection';
+import { ToggleThemeButton } from '../components/toggleThemeButton';
 
 function Home() {
   return (
     <React.Fragment>
       <Head>
         <title>Home - Nextron (with-javascript)</title>
-      </Head>      
-      <body>
+      </Head>
       <div className='
-            body
             w-screen 
             h-screen 
-            bg-black 
-            text-white
             relative
             overflow-hidden
       '>
@@ -24,18 +21,22 @@ function Home() {
               grid-rows-[1fr_90px] 
               grid-cols-[241px_minmax(495px,1fr)] 
               h-screen
-              bg-black
         '>
           {/* Aside -> Arduino Controls */}
           <aside className='
+              bg-blue
+              text-white
+              dark:bg-black
               grid
               justify-items-center
-              bg-aside
               row-span-1
-              grid-rows-[50px_1fr]
+              grid-rows-[50px_50px_1fr]
               grid-cols-1
               p-[20px]
+              transition-color
+              duration-300
           '>
+            <ToggleThemeButton />
             <h1>Connection</h1>
             <SelectConnectPort id={1}/>
           </aside>
@@ -45,21 +46,26 @@ function Home() {
             row-span-1
             col-span-1 
             overflow-y-auto
+            relative
+            transition-color
+            duration-300
           '>
             <PanelSection />
           </section>
 
           {/* Footer -> Messages to Arduino */}
           <footer className='
-            bg-footer 
-            col-span-2'
-          >
+            bg-blueSky
+            dark:bg-blackDark-3
+            col-span-2
+            transition-color
+            duration-300
+          '>
 
           </footer>
 
         </div>
       </div>
-      </body>
     </React.Fragment>
   );
 };
