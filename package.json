@@ -7,15 +7,25 @@
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
+    "postinstall": "electron-builder install-app-deps",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps"
+    "build:all": "nextron build --all",
+    "build:win32": "nextron build --win --ia32",
+    "build:win64": "nextron build --win --x64",
+    "build:mac": "nextron build --mac --x64",
+    "build:linux": "nextron build --linux"
   },
   "dependencies": {
+    "@react-three/drei": "^9.64.0",
+    "@react-three/fiber": "^8.12.0",
+    "@types/three": "^0.150.1",
     "chart.js": "^4.2.1",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
     "react-chartjs-2": "^5.2.0",
-    "serialport": "^10.5.0"
+    "react-icons": "^4.8.0",
+    "serialport": "^10.5.0",
+    "three": "^0.151.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

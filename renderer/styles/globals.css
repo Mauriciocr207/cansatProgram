@@ -24,9 +24,14 @@
                 #121212 100%);
     }
     .scroll::-webkit-scrollbar {
-        width: 5px;
+        width: 11px;
         background-color: rgba(50, 50, 50, 0.442);
         border-radius: 7px;
+        transition: all 0.3s;
+    }
+
+    .scroll::-webkit-scrollbar:hover {
+        width: 10px;
     }
 
     .scroll::-webkit-scrollbar-thumb {

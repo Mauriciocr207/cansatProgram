@@ -8,7 +8,7 @@ function Home() {
   return (
     <React.Fragment>
       <Head>
-        <title>Home - Nextron (with-javascript)</title>
+        <title>Home</title>
       </Head>
       <div className='
             w-screen 

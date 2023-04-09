@@ -3,9 +3,10 @@ import { Grafic } from '../home/grafic';
 import { Presion } from '../home/grafics/presion';
 import { Temperatura } from '../home/grafics/temperatura';
 import { Velocity } from '../home/grafics/Velocity';
+import {Vision3D} from '../home/grafics/vision3d.jsx';
 export function PanelSection() {
     const Grafics = [
-      { grafic: <Presion/>, color: "bg-[#F52E00]" },
+      { grafic: <Vision3D/>, color: "bg-[#F52E00]" },
       { grafic: <Temperatura/>, color: "bg-[#F59200]"},
       { grafic: <Presion/>, color: "bg-[#4318F5]"},
       { grafic: <Temperatura/>, color: "bg-[#18F5A7]" },

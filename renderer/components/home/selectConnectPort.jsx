@@ -1,12 +1,13 @@
 import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
-import { ConnectionIcon } from "./connectionIcon";
+import {MdWifiTethering} from 'react-icons/md'
 
 export function SelectConnectPort({ id }) {
   // Clases css
   const classes = {
     button: `
       w-[50px] 
+      h-[50px]
       rounded-full 
       p-[9px] 
       backdrop-blur-md
@@ -170,7 +171,7 @@ export function SelectConnectPort({ id }) {
           className={` ${classes.button} ${btnConnection} `}
           onClick={wantToOpenConnection}
         >
-          <ConnectionIcon />
+          <MdWifiTethering className="w-full h-full"/>
         </button>
         <div className={classes.containerDropdown}>
           <div className={classes.dropdown}>

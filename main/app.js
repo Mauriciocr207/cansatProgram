@@ -2,6 +2,8 @@
 import { app, ipcMain, BrowserWindow } from 'electron';
 import serve from 'electron-serve';
 import { Connection } from '../serialPort/serialPort';
+import createWindow from './helpers/create-window';
+
 const connections = {}
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -12,8 +14,11 @@ if (isProd) {
   app.setPath('userData', `${app.getPath('userData')} (development)`);
 }
 
-function createWindow(){
-    const mainWindow = new BrowserWindow({
+
+
+app.whenReady()
+    .then(() => {
+      const win = createWindow('main', {
         backgroundColor: '#121212',
         width: 1500,
         height: 800,
@@ -28,14 +33,8 @@ function createWindow(){
             nodeIntegration: true,
         }
     });
-    return mainWindow
-  };
-
-app.whenReady()
-    .then(() => {
-      const win = createWindow();
       if (isProd) {
-        mainWindow.loadURL('app://./home.html');
+        win.loadURL('app://./home.html');
       } else {
         const port = process.argv[2];
         win.loadURL(`http://localhost:${port}/home`);
