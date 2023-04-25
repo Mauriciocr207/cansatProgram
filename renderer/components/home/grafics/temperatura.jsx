@@ -1,27 +1,7 @@
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Filler,
-    Legend,
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
-  
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Filler,
-    Legend
-  );
-  
+  import { ipcRenderer } from 'electron';
+import { useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
+
   const options = {
     responsive: true,
     plugins: {
@@ -41,7 +21,7 @@ import {
     labels,
     datasets: [
       {
-        fill: true,
+        fill: false,
         label: 'Dataset 2',
         data: [0,3,6,2,7,4,7,1],
         borderColor: 'rgb(53, 162, 235)',
@@ -54,5 +34,12 @@ import {
 
 
 export function Temperatura() {
+    useEffect(() => {
+      ipcRenderer.on('Arduino:data', (event, data) => {
+        const {acel} = data;
+        const {x} = acel;
+        console.log(data);
+      });
+    }, []);
     return <Line options={options} data={data} />;
 }
