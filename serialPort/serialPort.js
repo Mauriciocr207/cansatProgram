@@ -1,12 +1,12 @@
 // Conexión Serial
-const { SerialPort, DelimiterParser } = require("serialport");
-const { BrowserWindow } = require('electron');
-const baudRateValue = 9600;
+import { SerialPort, DelimiterParser } from "serialport";
+import { BrowserWindow } from 'electron';
+const baudRateValue = 1200;
 
-class Connection {
-    constructor() {
+export class Connection {
+    constructor(port) {
         this.port = new SerialPort({
-            path: 'COM1',
+            path: port,
             baudRate: baudRateValue,
             autoOpen: false
         });
@@ -34,4 +34,3 @@ class Connection {
         });
     };
 };
-module.exports = { Connection };
