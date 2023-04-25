@@ -1,6 +1,7 @@
 // Conexión Serial
 import { SerialPort, DelimiterParser } from "serialport";
 import { BrowserWindow } from 'electron';
+import { DbConnection, CreateData} from "../src/src/controllers/GeneralController.js";
 const baudRateValue = 9600;
 
 export class Connection {
@@ -21,6 +22,9 @@ export class Connection {
             autoOpen: false
         });
         console.log(`Port created on: ${this.port.path}`);
+        
+        // Conexion a la Base de Datos
+        DbConnection();
       
         // RECEPCION DE DATOS DEL ARDUINO
         const parse = this.port.pipe(new DelimiterParser({ delimiter: '\n' }));
@@ -30,6 +34,9 @@ export class Connection {
                 jsonData = JSON.stringify(data);                                    // Convert to JSON
                 jsonData = JSON.parse(data);                                        // Convert to JS object
             BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
+            
+            //Guardado de los datos arrojados en la Base de Datos
+            CreateData(jsonData);
             console.log(typeof jsonData, jsonData);                                 
         });
     };

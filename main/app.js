@@ -4,6 +4,8 @@ import serve from 'electron-serve';
 import { Connection } from '../serialPort/serialPort';
 import createWindow from './helpers/create-window';
 
+
+
 const connections = {}
 
 const isProd = process.env.NODE_ENV === 'production';
