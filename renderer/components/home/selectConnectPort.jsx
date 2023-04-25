@@ -37,6 +37,8 @@ export function SelectConnectPort({ id }) {
     menu: `
       bg-blue
       border-blueSky
+      srcoll
+      dark:scrollDark
       dark:bg-blackDark-3
       dark:border-greyDark-1
       w-full
@@ -47,6 +49,7 @@ export function SelectConnectPort({ id }) {
       rounded-xl
       absolute
       top-[3.1em]
+      overflow-y-scroll
     `,
     caret: `
       w-0
@@ -116,12 +119,11 @@ export function SelectConnectPort({ id }) {
   );
   // Creación de elementos puertos (elementos li)
   const portNames = [];
-  for (let i = 1; i <= 10; i++) portNames.push(`COM ${i}`);
+  for (let i = 1; i <= 11; i++) portNames.push(`COM ${i}`);
   const [ports, setPorts] = useState(createPorts("COM 1"));
   function createPorts(port) {
     return portNames.map((portName) => (
-      <>
-        <li
+      <li
           key={portName}
           className={`${classes.ports} ${portName == port ? "bg-blue3 dark:bg-greyDark-1" : ""}`}
           onClick={() => {
@@ -131,7 +133,6 @@ export function SelectConnectPort({ id }) {
         >
           {portName}
         </li>
-      </>
     ));
   }
   // Se envía la solicitud para abrir el puerto

@@ -25,18 +25,24 @@
     }
     .scroll::-webkit-scrollbar {
         width: 11px;
-        background-color: rgba(50, 50, 50, 0.442);
+        @apply bg-blue;
         border-radius: 7px;
         transition: all 0.3s;
     }
 
-    .scroll::-webkit-scrollbar:hover {
-        width: 10px;
+    .scoll::-webkit-scrollbar:hover {
+        width: 7px;
     }
 
     .scroll::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.228);
+        @apply bg-blueSky;
         border-radius: 7px;
+    }
+    .scrollDark::-webkit-scrollbar {
+        @apply bg-white;
+    }
+    .scrollDark::-webkit-slider-thumb {
+        @apply bg-black;
     }
 
     .drag {

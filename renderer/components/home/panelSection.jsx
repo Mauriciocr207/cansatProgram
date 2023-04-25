@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Grafic } from '../home/grafic';
-import { Presion } from '../home/grafics/presion';
-import { Temperatura } from '../home/grafics/temperatura';
-import { Velocity } from '../home/grafics/Velocity';
-import {Vision3D} from '../home/grafics/vision3d.jsx';
+import { Grafic } from './Grafic';
+// Grafics
+import { Presion } from './grafics/presion';
+import { Temperatura } from './grafics/Temperatura';
+import { Velocity } from './grafics/Velocity';
+import { Vision3D } from './grafics/vision3d';
+
 export function PanelSection() {
     const Grafics = [
       { grafic: <Vision3D/>, color: "bg-[#F52E00]" },
-      { grafic: <Temperatura/>, color: "bg-[#F59200]"},
+      { grafic: <Velocity/>, color: "bg-[#F59200]"},
       { grafic: <Presion/>, color: "bg-[#4318F5]"},
       { grafic: <Temperatura/>, color: "bg-[#18F5A7]" },
       { grafic: <Presion/>, color: "bg-[#F5DB0C]" },
@@ -62,9 +64,8 @@ export function PanelSection() {
                         key={e.color} onMouseOver={ () => {
 
                             setSectionBgColor(e.color);
-                        }} Children={
-                          e.grafic
-                        }/>
+                        }} 
+                        Children={e.grafic}/>
                       )
                     }                    
               </div>

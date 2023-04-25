@@ -49,25 +49,22 @@ app.whenReady()
         const dataPort = `${data.port}`.split(" ").join(""); // Se limpia el string el puerto de espacios
         if( !connections.hasOwnProperty( `connection_${data.id}` ) ) connections[`connection_${data.id}`] = new Connection(dataPort);
         const connection = connections[`connection_${data.id}`];
+        function closePort(con) {
+          con.port.close( err => {
+            if (err) console.log("Cant close port", err.message);
+            else {
+              console.log("Port closed");
+              sendData(`openedConnection_${data.id}`, false);
+            }
+        });
+        }
           // Se cierra la conexión antes de abrir otra
           if(connection.port.isOpen) {
-              connection.port.close( err => {
-                  if (err) console.log("Can´t close port");
-                  else {
-                    console.log("Port closed");
-                    sendData(`openedConnection_${data.id}`, false);
-                  }
-              });
-          };
-  
-          console.log(
-            connection.port.path == dataPort,
-            connection.port.path,
-            dataPort
-          )
-
-          // Se crea puerto serial y se abre la conexión
-          connection.createSerialPort(dataPort);
+              closePort(connection);
+          } else {
+            // Se crea puerto serial y se abre la conexión
+            closePort(connection);
+            connection.createSerialPort(dataPort);
             connection.port.open( function (err) {
                 if (err) {
                     console.log(`Error opening port on connection_${data.id} ->`, err.message);
@@ -78,6 +75,7 @@ app.whenReady()
                     sendData(`openedConnection_${data.id}`, true);
                 }
             });
+          };         
       });
     })
     .catch( err => {

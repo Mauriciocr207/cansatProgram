@@ -1,23 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Environment } from '@react-three/drei';
+import { Cansat } from './cansatGLTF/Cansat';
 
 export function Vision3D({props}) {
-    const [angulos, setAngulos] = useState({x:0, y:0, z:0});
-
     return <>
         <div className='w-full h-full '>
-            <Canvas>
-                <ambientLight intensity={0.1}/>
-                <directionalLight color="red" position={[0,0,5]} />
-                <mesh
+            <Canvas shadows camera={{position:[10,10,30]}}>
+                
+                <pointLight position={[10,10,30]} />
+                <pointLight position={[10,20,30]} />
+                <pointLight position={[10,-20,30]} intensity={0.5} />
+                <axesHelper args={[20]} />
+                {/* <mesh
                     rotation-x={angulos.x}
                     rotation-y={angulos.y}
                     rotation-z={angulos.z}
                 >
-                    <sphereBufferGeometry/>
                     <meshStandardMaterial wireframe/>
-                </mesh>
+                </mesh> */}
+                <Cansat />
+                <Environment preset="city" background blur={10} />
                 <OrbitControls />
             </Canvas>
         </div>

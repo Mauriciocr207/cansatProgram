@@ -1,7 +1,7 @@
 // Conexión Serial
 import { SerialPort, DelimiterParser } from "serialport";
 import { BrowserWindow } from 'electron';
-const baudRateValue = 9600;
+const baudRateValue = 1200;
 
 export class Connection {
     constructor(port) {
