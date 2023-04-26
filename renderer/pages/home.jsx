@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { SelectConnectPort } from '../components/home/selectConnectPort';
 import { PanelSection } from '../components/home/panelSection';
 import { ToggleThemeButton } from '../components/toggleThemeButton';
@@ -39,6 +40,9 @@ function Home() {
             <ToggleThemeButton />
             <h1>Connection</h1>
             <SelectConnectPort id={1}/>
+            <Link href="/ManageDatabase">
+              <a>Go to Database</a>
+            </Link>
           </aside>
 
           {/* Section -> Grafics */}
