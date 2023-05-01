@@ -26,7 +26,7 @@ npm ci
 ``` PowerShell
 npm run dev
 ```
-__Uso de la base de Datos__
+__Uso de la base de Datos (CON MYSQL)__
 Para poder usar la base de datos correctamente, primero hay que instalar el sevidor de mysql para que al correr el programa, este no retorne un error.
 
 Para instalarlo, recomiendo que sigan este tutorial que lo explica sencillo:
@@ -50,8 +50,15 @@ Para poder observar el guardado de datos, se clickea sobre la tabla que se crea 
 
 Nota: No olvidar refrescar cada vez que se haga una modificacion para observar los cambios.
 
+__Uso de la base de Datos (CON SQLITE)__
+
+Para el uso de esta forma no se tiene que instalar nada (Es decir, no necesita la inicializacion de un servidor), con el simple hecho de instalar el sqlite studio, el archivo que se genera cuando el programa se corre es compatible para poder observar que los datos se guardan. 
+
 
 __Dependencias agregadas__
 
-Se agregaron 2 dependencias, la de sequelize y la de mysql2 
+Se agregaron dependencias:
+ La de sequelize (Para cualquier conexion db)
+ La de mysql2 (uso del mysql)
+ La de sqlite3 (Uso del sqlite) 
 (No es necesario instalarlas extras, cuando se usa el 'npm ci' estas son instaladas junto con las otras dependencias)
