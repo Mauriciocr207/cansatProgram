@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 export function Database() {
     const {content, setContent} = useState('hola');
     useEffect( () => {
-        console.log('hola', 'aqui ando');
         ipcRenderer.on('Arduino:data', (event, data) => {
             console.log(data);
         });
+        ipcRenderer.send('database', data);
     }, []);
     
     return <>
