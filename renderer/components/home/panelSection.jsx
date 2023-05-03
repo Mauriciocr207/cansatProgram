@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Grafic } from './Grafic';
+import { Graphic } from './Graphic';
 // Grafics
-import { Presion } from './grafics/presion';
+import { Presion } from './grafics/Presion';
 import { Temperatura } from './grafics/Temperatura';
 import { Velocity } from './grafics/Velocity';
-import { Vision3D } from './grafics/vision3d';
+import { Vision3D } from './grafics/Vision3d';
 
 export function PanelSection() {
     const Grafics = [
@@ -60,7 +60,7 @@ export function PanelSection() {
                   scroll
               '>
                     {
-                      Grafics.map( e => <Grafic
+                      Grafics.map( e => <Graphic
                         key={e.color} onMouseOver={ () => {
 
                             setSectionBgColor(e.color);
