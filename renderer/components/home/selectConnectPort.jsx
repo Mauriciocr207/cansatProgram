@@ -119,7 +119,7 @@ export function SelectConnectPort({ id }) {
   );
   // Creación de elementos puertos (elementos li)
   const portNames = [];
-  for (let i = 1; i <= 11; i++) portNames.push(`COM ${i}`);
+  for (let i = 1; i <= 15; i++) portNames.push(`COM ${i}`);
   const [ports, setPorts] = useState(createPorts("COM 1"));
   function createPorts(port) {
     return portNames.map((portName) => (

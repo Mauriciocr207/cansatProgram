@@ -4,7 +4,7 @@ import { Graphic } from './Graphic';
 import { Presion } from './grafics/Presion';
 import { Temperatura } from './grafics/Temperatura';
 import { Velocity } from './grafics/Velocity';
-import { Vision3D } from './grafics/Vision3d';
+import { Vision3D } from './grafics/vision3d';
 
 export function PanelSection() {
     const Grafics = [

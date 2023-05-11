@@ -27,10 +27,16 @@ export class Connection {
         parse.on('data', (data) => {
             let jsonData = data.toString();                                         //Convert to string
                 jsonData = jsonData.replace(/\r?\n|\r/g, "");                       //remove '\r' from this String
-                jsonData = JSON.stringify(data);                                    // Convert to JSON
-                jsonData = JSON.parse(data);                                        // Convert to JS object
-            BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
-            console.log(typeof jsonData, jsonData);                                 
+                try {
+                    jsonData = JSON.stringify(data); // Convert to JSON
+                    jsonData = JSON.parse(data); // Convert to JS object
+                    BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
+                    console.log(typeof jsonData, jsonData);
+                } catch (err) {
+                    console.log(`${err.message} : ${jsonData}`); 
+                }                                        
+            
+                                             
         });
     };
 };

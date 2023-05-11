@@ -2,12 +2,14 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react"
 
 export function Velocity() {
-    const [texto, setTexto] = useState('hola');
-    useEffect(() => {
+    useEffect( () => {
+        console.log('hola');
         ipcRenderer.on('Arduino:data', (event, data) => {
-            setTexto(data.velocidad);
+            console.log(data);
         });
-    }, []);
+    } )
+
+    const [texto, setTexto] = useState('hola');
     return <>
         <p>
             {texto}

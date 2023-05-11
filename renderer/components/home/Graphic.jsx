@@ -2,11 +2,6 @@ import { ipcRenderer } from "electron";
 import { useEffect } from "react";
 
 export function Graphic({onMouseOver, Children}) {
-    useEffect( () => {
-        // ipcRenderer.on('Arduino:data', (event, data) => {
-        //     console.log(data);
-        // });
-    } )
 
 
     return(

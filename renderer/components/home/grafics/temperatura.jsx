@@ -34,12 +34,5 @@ import { Line } from 'react-chartjs-2';
 
 
 export function Temperatura() {
-    useEffect(() => {
-      ipcRenderer.on('Arduino:data', (event, data) => {
-        const {acel} = data;
-        const {x} = acel;
-        console.log(data);
-      });
-    }, []);
     return <Line options={options} data={data} />;
 }
