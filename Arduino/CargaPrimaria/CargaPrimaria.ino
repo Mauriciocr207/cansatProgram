@@ -16,7 +16,7 @@
 //VARIABLES GLOBALES//
 //GPS
 TinyGPSPlus gps;
-SoftwareSerial gps_serial( 5,6 ); // -> Tx , Rx
+SoftwareSerial gps_serial(6,7); // -> Tx , Rx
 //MGY-91
 DynamicJsonDocument doc(1024);
 MPU9250_asukiaaa GY91;
@@ -84,6 +84,6 @@ void setup() {
 
 void loop() {
   GPS ();
-  MGY ();
-  LORA ();
+  //MGY ();
+  //LORA ();
 }
