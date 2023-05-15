@@ -37,7 +37,7 @@ export function Presion() {
               label: 'Temperature',
               data: [22,19,27,23,22,24,17,25,23,24,20,19, 22],
               fill: false,          // Don't fill area under the line
-              borderColor: 'grey'  // Line color
+              borderColor: '#3A98B9',  // Line color
             }
           ]
     }

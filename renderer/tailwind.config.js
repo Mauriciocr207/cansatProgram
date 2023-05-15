@@ -11,22 +11,14 @@ module.exports = {
       'white': '#ffffff',
       'black': '#000000',
       'transparent': 'rgb(0,0,0,0)',
-      
-      //  LIGHT MODE
-      'purple': '#ad7be9',
-      'blue': '#3E54AC',
-      'blue2': '#19376D',
-      'blue3': '#3A98B9',
-      'blueSky': '#BFDCE5',
-      'greyLight': '#EEEEEE',
-
-      // DARK MODE
-      'blackDark-1': '#181818',
-      'blackDark-2': '#141414',
-      'blackDark-3': '#2B2B2B',
-      'blackDark-4': '#423F3E',
-      'greyDark-1': '#a5a5a572',
-      'greyDark-2': '#b3b3b3',
+      "blue": "#07f",
+      "lightBlue": "#61abff",
+      "greyBlue": "#697c9b",
+      "hardLightBlue": "#ECEFF5",
+      "darkBlue1": "#4b699b",
+      "darkBlue2": "#1e2b48",
+      "hardDarkBlue1": "#2a3341",
+      "harddarkBlue2": "#212630",
 
     },
     extend: {},

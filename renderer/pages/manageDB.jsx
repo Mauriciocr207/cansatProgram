@@ -43,10 +43,7 @@ function Home() {
             {/* Controls */}
             <div className="bg-white shadow controls w-full dark:bg-blackDark-2 rounded-[10px] transition-color duration-300 p-[30px] text-white text-center">
               <div className="flex flex-col gap-[10px]">
-                <h2 className="text-greyBlue text-[18px]">Conección a carga primaria</h2>
-                <SelectConnectPort id={1}/>
-                <h2 className="text-greyBlue text-[18px]">Conección a carga secundaria</h2>
-                <SelectConnectPort id={2}/>
+                
               </div>
               
               <div className="w-full mt-[15px]">
@@ -58,7 +55,7 @@ function Home() {
           {/* Section -> Grafics */}
           <section
             className="row-span-1 col-span-1 rounded-[10px] overflow-y-auto relative transition-color duration-300 ">
-            <PanelSection />
+            {/* <PanelSection /> */}
           </section>
 
           {/* Footer -> Messages to Arduino */}

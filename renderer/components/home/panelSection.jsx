@@ -4,16 +4,16 @@ import { Graphic } from './Graphic';
 import { Presion } from './grafics/Presion';
 import { Temperatura } from './grafics/Temperatura';
 import { Velocity } from './grafics/Velocity';
-import { Vision3D } from './grafics/vision3d';
+import { Orientation } from './grafics/Orientation';
 
 export function PanelSection() {
     const Grafics = [
-      { grafic: <Vision3D/>, color: "bg-[#F52E00]" },
-      { grafic: <Velocity/>, color: "bg-[#F59200]"},
-      { grafic: <Presion/>, color: "bg-[#4318F5]"},
-      { grafic: <Temperatura/>, color: "bg-[#18F5A7]" },
-      { grafic: <Presion/>, color: "bg-[#F5DB0C]" },
-      { grafic: <Presion/>, color: "bg-[#F87030]" }
+      { grafic: <Orientation/>, color: "bg-[#F52E00]", titulo: "Orientación" },
+      { grafic: <Presion/>, color: "bg-[#F59200]", titulo: "Presión"},
+      { grafic: <Presion/>, color: "bg-[#4318F5]", titulo: "Presión"},
+      { grafic: <Temperatura/>, color: "bg-[#18F5A7]", titulo: "Temperatura"},
+      { grafic: <Presion/>, color: "bg-[#F5DB0C]", titulo: "Presión"},
+      { grafic: <Presion/>, color: "bg-[#F87030]", titulo: "Presión"}
     ];
     const [sectionBgColor, setSectionBgColor] = useState("bg-[#ffffff]");
 
@@ -29,10 +29,11 @@ export function PanelSection() {
           `}>
             <div className={
               ` bg-white
+                shadow
                 dark:bg-[rgb(0,0,0,0)]
                 h-full 
                 grid
-                grid-rows-[50px_1fr]
+                grid-rows-[1fr]
                 grid-cols-1 
                 transition-color
                 duration-300
@@ -40,7 +41,6 @@ export function PanelSection() {
                 `
           }
           >
-              <header className='drag w-full'></header>
               <div className='
                   px-[32px] 
                   py-[24px]
@@ -58,6 +58,7 @@ export function PanelSection() {
                   max-[1010px]:flex-wrap
                   max-[1010px]:items-center
                   scroll
+                  
               '>
                     {
                       Grafics.map( e => <Graphic
@@ -65,7 +66,8 @@ export function PanelSection() {
 
                             setSectionBgColor(e.color);
                         }} 
-                        Children={e.grafic}/>
+                        Children={e.grafic}
+                        titulo={e.titulo}/>
                       )
                     }                    
               </div>

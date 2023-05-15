@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Cansat } from './cansatGLTF/Cansat';
 
-export function Vision3D({props}) {
+export function Orientation({props}) {
     return <>
         <div className='w-full h-full '>
             <Canvas shadows camera={{position:[10,10,30]}}>
@@ -18,7 +18,13 @@ export function Vision3D({props}) {
                 >
                     <meshStandardMaterial wireframe/>
                 </mesh> */}
-                <Cansat />
+                <Cansat rotation = {[
+                    -Math.PI/2 + 0,
+                    0,
+                    0
+                ]}
+                position = {[-9,-11,5]}
+                />
                 <Environment preset="city" background blur={10} />
                 <OrbitControls />
             </Canvas>

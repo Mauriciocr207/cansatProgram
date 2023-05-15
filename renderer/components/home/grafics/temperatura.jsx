@@ -1,4 +1,4 @@
-  import { ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 import { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 

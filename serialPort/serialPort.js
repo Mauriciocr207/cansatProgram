@@ -26,17 +26,16 @@ export class Connection {
         const parse = this.port.pipe(new DelimiterParser({ delimiter: '\n' }));
         parse.on('data', (data) => {
             let jsonData = data.toString();                                         //Convert to string
-                jsonData = jsonData.replace(/\r?\n|\r/g, "");                       //remove '\r' from this String
+                jsonData = jsonData.replace(/\r?\n|\r/g, "");  
+                console.log(jsonData);                     //remove '\r' from this String
                 try {
                     jsonData = JSON.stringify(data); // Convert to JSON
                     jsonData = JSON.parse(data); // Convert to JS object
                     BrowserWindow.fromId(1).webContents.send('Arduino:data', jsonData);     // Send to principal window
                     console.log(typeof jsonData, jsonData);
                 } catch (err) {
-                    console.log(`${err.message} : ${jsonData}`); 
-                }                                        
-            
-                                             
+                    // console.log(`${err.message} : ${jsonData}`); 
+                }                                                                                    
         });
     };
 };
