@@ -25,11 +25,9 @@ void setup() {
   // Se inicia comunicacion serial
   Serial.begin(115200);
   gps_serial.begin(115200);
-
   // Verificamos el funcionamiento del módulo
   if(!radio.begin()) Serial.println("NRF24 is not responding");
   else Serial.println("OK");
-
   // radio.setChannel(115);
   radio.setDataRate(RF24_2MBPS);
   radio.setPALevel(RF24_PA_HIGH);
@@ -37,15 +35,15 @@ void setup() {
   radio.openWritingPipe(primaria_tierra); // Se setea la dirección del envío de datos
   radio.openReadingPipe(1, primaria_tierra); // Dirección de la recepción de datos
   radio.startListening();
-
   // Iniciamos los sensores
   // BMP280
   bmp.begin();
   // MPU9250
+  Wire.begin();
+  mpu.setWire(&Wire);
   mpu.beginAccel();
   mpu.beginGyro();
   mpu.beginMag();
-
 }
 
 
@@ -56,27 +54,9 @@ void loop() {
   mpuUpdateData();
   // BMP
   bmpUpdateData();
-  // GPS
-  // while (gps_serial.available() > 0) {
-  //   Serial.print(gps_serial.read());
-  //   if (gps.encode(gps_serial.read())) {
-  //     if (gps.location.isUpdated()) {
-  //       // Lectura de datos GPS
-  //       float lat = gps.location.lat();
-  //       float lon = gps.location.lng();
-  //       float alt = gps.altitude.meters();
-        
-  //       // Envío de datos a través de la comunicación serial
-  //       Serial.print("Latitud: ");
-  //       Serial.println(lat, 6);
-  //       Serial.print("Longitud: ");
-  //       Serial.println(lon, 6);
-  //       Serial.print("Altitud: ");
-  //       Serial.println(alt);
-  //     }
-  //   }
-  // }
-  
+  // // GPS
+  gpsUpdateData();
+ 
 
   // Serializamos el json y lo enviamos a través de nrf24l01
   String msg;
@@ -96,10 +76,8 @@ void sendMessage(String input) {
   int messageSize = sizeof(message);
   // Copiamos el string en el array de chars
   input.toCharArray(message, sizeof(message));
-  
   // Calculamos cuántos paquetes debemos enviar si el tamaño máximo de bytes
   int totalPackets = ceil((float)messageSize / PACKET_SIZE);
-  
   // Enviamos cada paquete por separado
   int currentPacket = 1;
   // Iteramos cada paquete
@@ -110,23 +88,18 @@ void sendMessage(String input) {
     int packetSize = min(PACKET_SIZE, messageSize - i);
     // se copia cada caracter de message en packet
     memcpy(packet, &message[i], packetSize);
-    
     // Detenemos la escucha 
     radio.stopListening();
     // Enviamos mensaje
     radio.write(&packet, packetSize);
     // Escuchamos de nuevo
     radio.startListening();
-    
     // Serial.println("Paquete " + String(currentPacket) + " de " + String(totalPackets) + " enviado");
     // Aumentamos el valor del paquete
     currentPacket++;
-
     // Pequeña pausa entre paquetes
     delay(10); 
   }
-  
-  // Serial.println("Mensaje completo enviado");
 }
 
 void radioAvailable() {
@@ -145,33 +118,48 @@ void radioAvailable() {
   }
 }
 
+// Actualizar datos de MPU9250
 void mpuUpdateData() {
-  if(mpu.accelUpdate() == 0) {
-    doc["accel"]["x"] = mpu.accelX();
-    doc["accel"]["y"] = mpu.accelY();
-    doc["accel"]["z"] = mpu.accelZ();
-  }
-  if(mpu.gyroUpdate() == 0) {
-    doc["gyro"]["x"] = mpu.gyroX();
-    doc["gyro"]["y"] = mpu.gyroY();
-    doc["gyro"]["z"] = mpu.gyroZ();
-  }
-  if(mpu.magUpdate() == 0) {
-    doc["mag"]["x"] = mpu.magX();
-    doc["mag"]["y"] = mpu.magY();
-    doc["mag"]["z"] = mpu.magZ();
-  }
+  mpu.accelUpdate();
+  mpu.gyroUpdate();
+  mpu.magUpdate();
+  doc["a_x"] = mpu.accelX();
+  doc["a_y"] = mpu.accelY();
+  doc["a_z"] = mpu.accelZ();
+  doc["g_x"] = mpu.gyroX();
+  doc["g_y"] = mpu.gyroY();
+  doc["g_z"] = mpu.gyroZ();
+  doc["m_x"] = mpu.magX();
+  doc["m_y"] = mpu.magY();
+  doc["m_z"] = mpu.magZ();
+  // if(mpu.accelUpdate() == 0) {
+  //   doc["accel"]["x"] = mpu.accelX();
+  //   doc["accel"]["y"] = mpu.accelY();
+  //   doc["accel"]["z"] = mpu.accelZ();
+  // }
+  // if(mpu.gyroUpdate() == 0) {
+  //   doc["gyro"]["x"] = mpu.gyroX();
+  //   doc["gyro"]["y"] = mpu.gyroY();
+  //   doc["gyro"]["z"] = mpu.gyroZ();
+  // }
+  // if(result == 2) {
+  //   doc["mag"]["x"] = mpu.magX();
+  //   doc["mag"]["y"] = mpu.magY();
+  //   doc["mag"]["z"] = mpu.magZ();
+  // }
 }
 
+// Actualizar datos de BMP280
 void bmpUpdateData() {
-  doc["temperature"] = bmp.readTemperature();
-  doc["pressure"] = bmp.readPressure()/3377;
-  doc["altitude"] = bmp.readAltitude(1013.25);
+  doc["t"] = bmp.readTemperature();
+  doc["p"] = bmp.readPressure()/3377;
+  doc["a"] = bmp.readAltitude(1013.25);
 }
 
+// Actualizar datos del gps 
 void gpsUpdateData() {
-  doc["gps"]["lat"] = String(gps.location.lat(),6);
-  doc["gps"]["long"] = String(gps.location.lng(),6);
-  doc["gps"]["alt"] = gps.altitude.meters();
+  doc["gps_lat"] = String(gps.location.lat(),6);
+  doc["gps_long"] = String(gps.location.lng(),6);
+  doc["gps_alt"] = gps.altitude.meters();
 }
 

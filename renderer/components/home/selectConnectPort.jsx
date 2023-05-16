@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import {MdWifiTethering} from 'react-icons/md'
 
-export function SelectConnectPort({ id }) {
+export function SelectConnectPort({ id, nombreCarga }) {
   // Clases css
   const classes = {
     button: `
@@ -136,7 +136,7 @@ export function SelectConnectPort({ id }) {
   }
   // Se envía la solicitud para abrir el puerto
   function wantToOpenConnection() {
-    ipcRenderer.send("wantToOpenConnection", { port: selectedPort, id: id });
+    ipcRenderer.send("wantToOpenConnection", { id: id, port: selectedPort, name: nombreCarga });
   }
   // Se recibe la respuesta de la solicitud
   useEffect(() => {

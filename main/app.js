@@ -77,6 +77,15 @@ app.whenReady()
             });
           };         
       });
+      ipcMain.on('Arduino:data', (event,data) => {
+        const {idConnection} = data;
+        const connection = connections[`connection_${idConnection}`];
+        if(connection !== undefined) {
+          const port = connection.port;
+          const msg = data.message;
+          port.write(Buffer.from(msg));
+        }
+      })
     })
     .catch( err => {
       console.log(err);
