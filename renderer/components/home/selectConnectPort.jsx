@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import {MdWifiTethering} from 'react-icons/md'
 
-export function SelectConnectPort({ id, nombreCarga }) {
+export function SelectConnectPort({ id, nombreCarga, className }) {
   // Clases css
   const classes = {
     button: `
@@ -158,7 +158,7 @@ export function SelectConnectPort({ id, nombreCarga }) {
   return (
     <>
       <div
-        className="
+        className={`
         w-full
         grid
         grid-rows-[50px_50px]
@@ -168,7 +168,8 @@ export function SelectConnectPort({ id, nombreCarga }) {
         font-bold
         text-[17px]
         text-left
-      "
+        ${className}
+      `}
       >
         <button
           className={` ${classes.button} ${btnConnection} `}

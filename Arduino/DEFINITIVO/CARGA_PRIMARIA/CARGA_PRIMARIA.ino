@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <RF24.h>
 #include <ArduinoJson.h>
-#include <MPU9250_asukiaaa.h>
+#include <MPU6050_light.h>
 #include <Adafruit_BMP280.h>
 #include <TinyGPS++.h>
 #include <TinyGPSPlus.h>
@@ -11,7 +11,7 @@
 StaticJsonDocument<200> doc;
 // // GY91
 Adafruit_BMP280 bmp; // I2C
-MPU9250_asukiaaa mpu;
+MPU6050 mpu(Wire);
 // NRF24L01
 RF24 radio(9, 10); // Pins CE y CSN del módulo NRF24L01
 const byte primaria_tierra[] = "155555"; // Direccion entre la carga primaria y tierra
@@ -24,7 +24,7 @@ SoftwareSerial gps_serial( 5,6 ); // -> Tx , Rx
 void setup() {
   // Se inicia comunicacion serial
   Serial.begin(115200);
-  gps_serial.begin(115200);
+  gps_serial.begin(9600);
   // Verificamos el funcionamiento del módulo
   if(!radio.begin()) Serial.println("NRF24 is not responding");
   else Serial.println("OK");
@@ -40,10 +40,14 @@ void setup() {
   bmp.begin();
   // MPU9250
   Wire.begin();
-  mpu.setWire(&Wire);
-  mpu.beginAccel();
-  mpu.beginGyro();
-  mpu.beginMag();
+  byte status = mpu.begin();
+  Serial.print(F("MPU6050 status: "));
+  Serial.println(status);
+  while(status!=0){ } // stop everything if could not connect to MPU6050
+  Serial.println(F("Calculating offsets, do not move MPU6050"));
+  delay(1000);
+  mpu.calcOffsets(true,true); // gyro and accelero
+  Serial.println("Done!\n");
 }
 
 
@@ -54,15 +58,20 @@ void loop() {
   mpuUpdateData();
   // BMP
   bmpUpdateData();
-  // // GPS
-  gpsUpdateData();
- 
+  // GPS
+  while(gps_serial.available()) {
+    gps.encode( gps_serial.read() );
+  }
+  if(gps.location.isValid()) {
+    gpsUpdateData();
+  }
+  // TIEMPO
+  doc["t"] = millis();
 
   // Serializamos el json y lo enviamos a través de nrf24l01
   String msg;
   int buff = serializeJson(doc, msg);
-  Serial.print(buff);
-  Serial.print("Enviando mensaje: ");
+  // Serial.print("Enviando mensaje (" + String(buff) + "): ");
   Serial.println(msg);
   sendMessage(msg);
 
@@ -120,46 +129,23 @@ void radioAvailable() {
 
 // Actualizar datos de MPU9250
 void mpuUpdateData() {
-  mpu.accelUpdate();
-  mpu.gyroUpdate();
-  mpu.magUpdate();
-  doc["a_x"] = mpu.accelX();
-  doc["a_y"] = mpu.accelY();
-  doc["a_z"] = mpu.accelZ();
-  doc["g_x"] = mpu.gyroX();
-  doc["g_y"] = mpu.gyroY();
-  doc["g_z"] = mpu.gyroZ();
-  doc["m_x"] = mpu.magX();
-  doc["m_y"] = mpu.magY();
-  doc["m_z"] = mpu.magZ();
-  // if(mpu.accelUpdate() == 0) {
-  //   doc["accel"]["x"] = mpu.accelX();
-  //   doc["accel"]["y"] = mpu.accelY();
-  //   doc["accel"]["z"] = mpu.accelZ();
-  // }
-  // if(mpu.gyroUpdate() == 0) {
-  //   doc["gyro"]["x"] = mpu.gyroX();
-  //   doc["gyro"]["y"] = mpu.gyroY();
-  //   doc["gyro"]["z"] = mpu.gyroZ();
-  // }
-  // if(result == 2) {
-  //   doc["mag"]["x"] = mpu.magX();
-  //   doc["mag"]["y"] = mpu.magY();
-  //   doc["mag"]["z"] = mpu.magZ();
-  // }
+  mpu.update();
+  doc["ang_x"]= mpu.getAngleX(); 
+  doc["ang_y"]= mpu.getAngleY(); 
+  doc["ang_z"]= mpu.getAngleZ(); 
 }
 
 // Actualizar datos de BMP280
 void bmpUpdateData() {
-  doc["t"] = bmp.readTemperature();
-  doc["p"] = bmp.readPressure()/3377;
-  doc["a"] = bmp.readAltitude(1013.25);
+  doc["temp"] = bmp.readTemperature();
+  doc["pres"] = bmp.readPressure()/3377;
+  doc["alt"] = bmp.readAltitude(1013.25);
 }
 
 // Actualizar datos del gps 
-void gpsUpdateData() {
-  doc["gps_lat"] = String(gps.location.lat(),6);
-  doc["gps_long"] = String(gps.location.lng(),6);
-  doc["gps_alt"] = gps.altitude.meters();
-}
+void gpsUpdateData() { 
+  doc["gps"][0] = String(gps.location.lat(), 6);
+  doc["gps"][1] = String(gps.location.lng(), 6); 
+  doc["gps"][2] = gps.altitude.meters(); 
+}  
 

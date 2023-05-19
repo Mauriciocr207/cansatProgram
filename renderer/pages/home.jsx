@@ -16,11 +16,11 @@ function Home() {
       {/* body */}
       <div className="w-screen h-screen relative overflow-hidden">
         {/* layer */}
-        <div className="bg-hardLightBlue dark:bg-black transition-color grid grid-rows-[25px_1fr_90px] gap-[10px] grid-cols-[320px_minmax(495px,1fr)] h-screen px-[10px]">
+        <div className="bg-hardLightBlue dark:bg-black transition-color grid grid-rows-[25px_1fr_90px] gap-[10px] grid-cols-[320px_minmax(495px,1fr)] h-screen  px-[10px] transition-color duration-300">
           {/* Drag */}
           <div className="drag w-full h-full col-span-2"></div>
           {/* Aside -> Arduino Controls */}
-          <aside className=" text-black dark:bg-black grid justify-items-center row-span-1 grid-rows-[180px_1fr] gap-[10px] grid-cols-1 transition-color duration-300">
+          <aside className=" text-black dark:bg-black grid justify-items-center row-span-1 grid-rows-[180px_1fr] gap-[10px] grid-cols-1 transition-color duration-300 overflow-y-auto scroll">
             {/* Navigation */}
             <div className="bg-white shadow dark:bg-blackDark-2 w-full rounded-[10px] transition-color duration-300 grid grid-rows-3 gap-[5px] text-center p-[15px] text-[15px] ">
               {/* THEME */}
@@ -41,11 +41,11 @@ function Home() {
               </Link >
             </div>
             {/* Controls */}
-            <div className="bg-white shadow controls w-full dark:bg-blackDark-2 rounded-[10px] transition-color duration-300 p-[30px] text-white text-center">
+            <div className="bg-white shadow controls w-full dark:bg-blackDark-2 rounded-[10px] transition-color duration-300 p-[30px] text-white text-center box-border">
               <div className="flex flex-col gap-[10px]">
-                <h2 className="text-greyBlue text-[18px]">Conección a Carga primaria</h2>
-                <SelectConnectPort id={1}/>
-                <h2 className="text-greyBlue text-[18px]">Conección a carga secundaria</h2>
+                <h2 className="text-greyBlue text-[18px]">Conexión a Carga primaria</h2>
+                <SelectConnectPort id={1} className={"relative z-50"}/>
+                <h2 className="text-greyBlue text-[18px]">Conexión a carga secundaria</h2>
                 <SelectConnectPort id={2}/>
               </div>
               <div className="w-full mt-[15px]">
@@ -61,8 +61,14 @@ function Home() {
           </section>
 
           {/* Footer -> Messages to Arduino */}
-          <footer className=" dark:bg-blackDark-3 col-span-2 transition-color duration-300"
-          ></footer>
+          <footer className=" dark:bg-blackDark-3 col-span-2 transition-color duration-300 pb-[1rem] flex justify-center"
+          >
+            <div className="w-[80%] max-w-[80rem] h-full flex justify-evenly gap-[4rem]">
+              <img src="./img/EEK__logo.webp" alt="" srcset="" />
+              <img src="./img/NASA_logo.webp" alt="" srcset="" />
+              <img src="./img/peu.webp" alt="" srcset="" />   
+            </div>
+          </footer>
         </div>
       </div>
     </React.Fragment>

@@ -5,14 +5,15 @@ import { Presion } from './grafics/Presion';
 import { Temperatura } from './grafics/Temperatura';
 import { Velocity } from './grafics/Velocity';
 import { Orientation } from './grafics/Orientation';
+import { Altitude } from './grafics/Altitude';
 
 export function PanelSection() {
     const Grafics = [
       { grafic: <Orientation/>, color: "bg-[#F52E00]", titulo: "Orientación" },
-      { grafic: <Presion/>, color: "bg-[#F59200]", titulo: "Presión"},
+      { grafic: <Velocity/>, color: "bg-[#F59200]", titulo: "Presión"},
       { grafic: <Presion/>, color: "bg-[#4318F5]", titulo: "Presión"},
       { grafic: <Temperatura/>, color: "bg-[#18F5A7]", titulo: "Temperatura"},
-      { grafic: <Presion/>, color: "bg-[#F5DB0C]", titulo: "Presión"},
+      { grafic: <Altitude/>, color: "bg-[#F5DB0C]", titulo: "Altitud"},
       { grafic: <Presion/>, color: "bg-[#F87030]", titulo: "Presión"}
     ];
     const [sectionBgColor, setSectionBgColor] = useState("bg-[#ffffff]");

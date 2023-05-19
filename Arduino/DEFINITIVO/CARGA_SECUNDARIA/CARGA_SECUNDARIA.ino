@@ -1,11 +1,11 @@
+#include <NeoSWSerial.h>
 #include <SPI.h>
 #include <RF24.h>
 #include <ArduinoJson.h>
-#include <MPU9250_asukiaaa.h>
 #include <Adafruit_BMP280.h>
 #include <TinyGPS++.h>
 #include <TinyGPSPlus.h>
-#include <SoftwareSerial.h>
+#include <Servo.h>
 
 // JSON DOCUMENT
 StaticJsonDocument<200> doc;
@@ -18,12 +18,16 @@ const byte secundaria_tierra[] = "255555"; // Direccion entre la carga primaria 
 const int PACKET_SIZE = 32; // Tamaño máximo del paquete de datos
 //  GPS
 TinyGPSPlus gps;
-SoftwareSerial gps_serial( 5,6 ); // -> Tx , Rx
+NeoSWSerial gps_serial( 5,6 ); // -> Tx , Rx
+// Servos
+Servo servo1;
+Servo servo2;
+// bool mover = false;
 
 void setup() {
   // Se inicia comunicacion serial
   Serial.begin(115200);
-  gps_serial.begin(115200);
+  gps_serial.begin(9600);
   // Verificamos el funcionamiento del módulo
   if(!radio.begin()) Serial.println("NRF24 is not responding");
   else Serial.println("OK");
@@ -36,8 +40,10 @@ void setup() {
   // Iniciamos los sensores
   // BMP280
   bmp.begin();
+  // Inciciamos los servos
+  servo1.attach(4);
+  servo2.attach(3);
 }
-
 
 void loop() {
   //== TRANSMISOR ==//
@@ -45,7 +51,13 @@ void loop() {
   // BMP
   bmpUpdateData();
   // GPS
-
+  while(gps_serial.available()) {
+    gps.encode( gps_serial.read() );
+  }
+  if(gps.location.isValid()) {
+    gpsUpdateData();
+  }
+  
   // Serializamos el json y lo enviamos a través de nrf24l01
   String msg;
   int buff = serializeJson(doc, msg);
@@ -53,6 +65,16 @@ void loop() {
   Serial.print("Enviando mensaje: ");
   Serial.println(msg);
   sendMessage(msg);
+  // if(!mover) {
+  //   mover = true;
+  //   servo1.write(180);
+  //   servo2.write(180);
+  // } else {
+  //   mover = false;
+  //   servo1.write(0);
+  //   servo2.write(0);
+  // }
+  // delay(500);
 }
 
 void sendMessage(String input) {
@@ -106,9 +128,13 @@ void radioAvailable() {
 
 // Actualizar datos de BMP280
 void bmpUpdateData() {
-  doc["temperature"] = bmp.readTemperature();
-  doc["pressure"] = bmp.readPressure()/3377;
-  doc["altitude"] = bmp.readAltitude(1013.25);
+  doc["temp"] = bmp.readTemperature();
+  doc["pres"] = bmp.readPressure()/3377;
+  float alt = bmp.readAltitude(1013.25);
+  doc["altitude"] = alt;
+  if(alt >= 10.00) {
+    Serial.println("He pasado la altura");
+  }
 }
 
 // Actualizar datos del gps 
