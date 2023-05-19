@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { useEffect, useState } from "react";
 import {MdWifiTethering} from 'react-icons/md'
 
-export function SelectConnectPort({ id }) {
+export function SelectConnectPort({ id, nombreCarga, className }) {
   // Clases css
   const classes = {
     button: `
@@ -16,7 +16,7 @@ export function SelectConnectPort({ id }) {
     `,
     select: `
       bg-blue
-      border-blueSky
+      border-0
       hover:bg-blue3
       dark:bg-blackDark-3
       dark:border-greyDark-1
@@ -36,20 +36,20 @@ export function SelectConnectPort({ id }) {
     `,
     menu: `
       bg-blue
-      border-blueSky
       srcoll
       dark:scrollDark
       dark:bg-blackDark-3
       dark:border-greyDark-1
       w-full
-      h-[410px]
+      h-[250px]
       list-none
       p-[0.5em]
       border-[3px]
       rounded-xl
       absolute
-      top-[3.1em]
+      top-[2.8em]
       overflow-y-scroll
+      scroll
     `,
     caret: `
       w-0
@@ -64,9 +64,8 @@ export function SelectConnectPort({ id }) {
       duration-300
     `,
     ports: `
-      bg-blue2
-      hover:bg-blueSky
-      hover:text-black
+      bg-lightBlue
+      hover:bg-darkBlue1
       dark:bg-blackDark-2
       dark:hover:bg-blackDark-4
       dark:hover:text-white
@@ -115,17 +114,17 @@ export function SelectConnectPort({ id }) {
   }
   // Cambios de estilo css en botón al llamar una conexión
   const [btnConnection, setbtnConnection] = useState(
-    "bg-[rgb(255,255,255,0.25)]"
+    "bg-[#ECEFF5] text-greyBlue"
   );
   // Creación de elementos puertos (elementos li)
   const portNames = [];
-  for (let i = 1; i <= 11; i++) portNames.push(`COM ${i}`);
+  for (let i = 1; i <= 15; i++) portNames.push(`COM ${i}`);
   const [ports, setPorts] = useState(createPorts("COM 1"));
   function createPorts(port) {
     return portNames.map((portName) => (
       <li
           key={portName}
-          className={`${classes.ports} ${portName == port ? "bg-blue3 dark:bg-greyDark-1" : ""}`}
+          className={`${classes.ports} ${portName == port ? "bg-darkBlue1 dark:bg-greyDark-1" : ""}`}
           onClick={() => {
             setSelectedPort(portName);
             setPorts(createPorts(portName));
@@ -137,7 +136,7 @@ export function SelectConnectPort({ id }) {
   }
   // Se envía la solicitud para abrir el puerto
   function wantToOpenConnection() {
-    ipcRenderer.send("wantToOpenConnection", { port: selectedPort, id: id });
+    ipcRenderer.send("wantToOpenConnection", { id: id, port: selectedPort, name: nombreCarga });
   }
   // Se recibe la respuesta de la solicitud
   useEffect(() => {
@@ -145,7 +144,7 @@ export function SelectConnectPort({ id }) {
   }, []);
   // Se aplican los estilos al botón en respuesta a la solicitud
   function openedConnection(event, opened) {
-    setbtnConnection("bg-[rgb(255,255,255,0.25)]");
+    setbtnConnection("bg-[#ECEFF5] text-greyBlue");
     setTimeout(() => {
       if (opened) {
         console.log("PUERTO ABIERTO");
@@ -159,14 +158,18 @@ export function SelectConnectPort({ id }) {
   return (
     <>
       <div
-        className="
+        className={`
         w-full
         grid
         grid-rows-[50px_50px]
         grid-cols-1
-        gap-[15px]
         place-items-center
-      "
+        gap-[10px]
+        font-bold
+        text-[17px]
+        text-left
+        ${className}
+      `}
       >
         <button
           className={` ${classes.button} ${btnConnection} `}

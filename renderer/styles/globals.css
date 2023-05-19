@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        display: block;
+    @font-face {
+        font-family: 'Roboto Mono', monospace;
+        src: url('../fonts/fonts/RobotoMono-VariableFont_wght.ttf') format('ttf');
+    }
+    body, * {
+        font-family: 'Roboto Mono', monospace;
     }
 }
 
@@ -19,35 +23,28 @@
     .bg-sectionDark {
         background-image:
             linear-gradient(180deg,
-                rgb(0, 0, 0, 0.5) 0,
-                #121212 30%,
-                #121212 100%);
+                rgb(0, 0, 0, 0.6) 0,
+                #141414 30%,
+                #141414 50%,
+                #141414 100%);
     }
     .scroll::-webkit-scrollbar {
         width: 11px;
-        @apply bg-blue;
+        @apply bg-white;
+        border-radius: 7px;
+        transition: all 0.3s;
+    }
+    .scroll::-webkit-scrollbar-thumb {
+        @apply bg-darkBlue1;
         border-radius: 7px;
         transition: all 0.3s;
     }
 
-    .scoll::-webkit-scrollbar:hover {
-        width: 7px;
-    }
-
-    .scroll::-webkit-scrollbar-thumb {
-        @apply bg-blueSky;
-        border-radius: 7px;
-    }
-    .scrollDark::-webkit-scrollbar {
-        @apply bg-white;
-    }
-    .scrollDark::-webkit-slider-thumb {
-        @apply bg-black;
-    }
-
+    /* DRAG */
     .drag {
         -webkit-app-region: drag;
     }
+
 
     .acepted {
         background-color: #20A714;
