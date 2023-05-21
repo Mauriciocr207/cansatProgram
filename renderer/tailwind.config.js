@@ -20,6 +20,11 @@ module.exports = {
       "hardDarkBlue1": "#2a3341",
       "harddarkBlue2": "#212630",
 
+      // gauge chart
+      "grey" : "rgb(34,48,64)",
+      "blueChart": "rgb(0,122,253)",
+      "green": "rgb(6,215,108)",
+
     },
     extend: {},
   },
