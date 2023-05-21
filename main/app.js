@@ -3,6 +3,8 @@ import { app, ipcMain, BrowserWindow } from 'electron';
 import serve from 'electron-serve';
 import { Connection } from '../serialPort/serialPort';
 import createWindow from './helpers/create-window';
+import { DbConnection, DropSchemas, ShowSchemas } from '../src/controllers/GeneralController';
+
 
 const connections = {}
 

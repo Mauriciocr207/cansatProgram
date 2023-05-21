@@ -17,8 +17,9 @@ const byte secundaria_tierra[] = "255555"; // Direccion entre la carga primaria 
 // para un paquete es de 32 bytes
 const int PACKET_SIZE = 32; // Tamaño máximo del paquete de datos
 //  GPS
+
 TinyGPSPlus gps;
-NeoSWSerial gps_serial( 5,6 ); // -> Tx , Rx
+NeoSWSerial gps_serial( 6,5 ); // -> Tx , Rx
 // Servos
 Servo servo1;
 Servo servo2;

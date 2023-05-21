@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
 
@@ -13,6 +13,15 @@ export function Velocity() {
     needle.current.style.transform = `rotate(${-90 + degrees}deg)`
     bar.current.style.transform = `rotate(${-90 + degrees}deg)`
     velocityValue.current.textContent = value;
+  }
+
+
+  // Calculo de la velocidad instantánea
+  let vf = 0;
+  let ti = 0;
+  function calcVelocity(vi,ti,tf,a) {
+    const vf = vi + a * (tf - ti);
+    return vf;
   }
 
   useEffect(() => {

@@ -21,6 +21,9 @@ export class Connection {
             autoOpen: false
         });
         console.log(`Port created on: ${this.port.path}`);
+        
+        // Conexion a la Base de Datos
+        DbConnection();
       
         // RECEPCION DE DATOS DEL ARDUINO
         const parse = this.port.pipe(new DelimiterParser({ delimiter: '\n' }));
