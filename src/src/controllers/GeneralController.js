@@ -73,3 +73,12 @@ export async function EliminateData(id){
         console.log("No se pudo eliminar", error);
     }
 };
+
+
+/**
+ * 
+ * Para exportar la funcion 
+ * import { DbConnection, CreateData} from "../src/src/controllers/GeneralController.js";
+ * 
+ * 
+ */
