@@ -10,7 +10,7 @@ import { Altitude } from './grafics/Altitude';
 export function PanelSection() {
     const Grafics = [
       { grafic: <Orientation/>, color: "bg-[#F52E00]", titulo: "Orientación" },
-      { grafic: <Velocity/>, color: "bg-[#F59200]", titulo: "Presión"},
+      { grafic: <Velocity/>, color: "bg-[#F59200]", titulo: "Velocidad"},
       { grafic: <Presion/>, color: "bg-[#4318F5]", titulo: "Presión"},
       { grafic: <Temperatura/>, color: "bg-[#18F5A7]", titulo: "Temperatura"},
       { grafic: <Altitude/>, color: "bg-[#F5DB0C]", titulo: "Altitud"},

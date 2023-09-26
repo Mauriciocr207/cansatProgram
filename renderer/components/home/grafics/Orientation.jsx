@@ -37,7 +37,7 @@ export function Orientation({props}) {
                 <Cansat rotation = {[angs.x, angs.z, -angs.y]}
                     position={[0,0,0]}
                 />
-                <Environment preset="city" background blur={10} />
+                <Environment preset="sunset" background blur={10} />
                 <OrbitControls />
             </Canvas>
         </div>

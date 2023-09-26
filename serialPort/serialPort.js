@@ -1,6 +1,7 @@
 // Conexión Serial
 import { SerialPort, DelimiterParser } from "serialport";
 import { BrowserWindow } from 'electron';
+import { DbConnection, DropSchemas, ShowSchemas } from '../src/controllers/GeneralController';
 const baudRateValue = 115200;
 
 export class Connection {
@@ -21,6 +22,9 @@ export class Connection {
             autoOpen: false
         });
         console.log(`Port created on: ${this.port.path}`);
+        
+        // Conexion a la Base de Datos
+        DbConnection();
       
         // RECEPCION DE DATOS DEL ARDUINO
         const parse = this.port.pipe(new DelimiterParser({ delimiter: '\n' }));

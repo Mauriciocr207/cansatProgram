@@ -17,12 +17,12 @@ const byte secundaria_tierra[] = "255555"; // Direccion entre la carga primaria 
 // para un paquete es de 32 bytes
 const int PACKET_SIZE = 32; // Tamaño máximo del paquete de datos
 //  GPS
+
 TinyGPSPlus gps;
-NeoSWSerial gps_serial( 5,6 ); // -> Tx , Rx
+NeoSWSerial gps_serial( 6,5 ); // -> Tx , Rx
 // Servos
 Servo servo1;
 Servo servo2;
-// bool mover = false;
 
 void setup() {
   // Se inicia comunicacion serial
@@ -65,16 +65,6 @@ void loop() {
   Serial.print("Enviando mensaje: ");
   Serial.println(msg);
   sendMessage(msg);
-  // if(!mover) {
-  //   mover = true;
-  //   servo1.write(180);
-  //   servo2.write(180);
-  // } else {
-  //   mover = false;
-  //   servo1.write(0);
-  //   servo2.write(0);
-  // }
-  // delay(500);
 }
 
 void sendMessage(String input) {
