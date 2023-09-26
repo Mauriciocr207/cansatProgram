@@ -1,6 +1,7 @@
 // Conexión Serial
 import { SerialPort, DelimiterParser } from "serialport";
 import { BrowserWindow } from 'electron';
+import { DbConnection, DropSchemas, ShowSchemas } from '../src/controllers/GeneralController';
 const baudRateValue = 115200;
 
 export class Connection {
