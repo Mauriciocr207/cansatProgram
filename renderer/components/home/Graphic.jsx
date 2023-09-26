@@ -12,7 +12,7 @@ export function Graphic({onMouseOver, Children, titulo}) {
                 pb-[70px]
                 w-full 
                 h-full 
-                rounded-lg 
+                rounded-lg
                 gap-[10px]
                 items-center 
                 justify-center

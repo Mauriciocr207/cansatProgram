@@ -25,6 +25,8 @@ module.exports = {
       "blueChart": "rgb(0,122,253)",
       "green": "rgb(6,215,108)",
 
+      "red": "#312f",
+
     },
     extend: {},
   },

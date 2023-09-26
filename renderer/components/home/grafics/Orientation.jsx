@@ -20,7 +20,7 @@ export function Orientation({props}) {
         });
     },[angs]);
     return <>
-        <div className='w-full h-full '>
+        <div className='w-full h-full rounded-lg overflow-hidden'>
             <Canvas shadows camera={{position:[10,10,30]}}>
                 
                 <pointLight position={[10,10,30]} />
