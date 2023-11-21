@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {FaSun, FaMoon} from 'react-icons/fa';
 
-export function ToggleThemeButton() {
+export function ThemeBtn() {
     const [theme, setTheme] = useState("light");
     const [contentButton, setContentButton] = useState(
         <FaSun className="w-full h-full"/>

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     * {
         margin: 0;
@@ -55,8 +56,12 @@
         background-color: #20A714;
     }
 
-    .denied {
+    .closed {
         background-color: #B72626;
+    }
+
+    .warning {
+        background-color: rgb(209, 124, 21);
     }
 
     .rotate {

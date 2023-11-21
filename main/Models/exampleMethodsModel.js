@@ -1,5 +1,4 @@
-import { Datos } from "../models/Datos.js";
-import { sequelize } from "../database/database.js";
+import { Datos } from "./Medition.js";
 
 export async function DbConnection(){
     try {

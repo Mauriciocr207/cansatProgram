@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Graphic } from './Graphic';
+import { Graphic } from './graphic';
 // Grafics
 import { Presion } from './grafics/Presion';
 import { Temperatura } from './grafics/Temperatura';
@@ -38,10 +38,8 @@ export function PanelSection() {
                 grid-cols-1 
                 transition-color
                 duration-300
-                
                 `
-          }
-          >
+          }>
               <div className='
                   px-[32px] 
                   py-[24px]
@@ -64,7 +62,6 @@ export function PanelSection() {
                     {
                       Grafics.map( e => <Graphic
                         key={e.color} onMouseOver={ () => {
-
                             setSectionBgColor(e.color);
                         }} 
                         Children={e.grafic}

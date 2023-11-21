@@ -2,11 +2,9 @@ import { ipcRenderer } from "electron";
 import { useEffect } from "react";
 
 export function Graphic({onMouseOver, Children, titulo}) {
-
-
     return(
         <>
-            <div className="         
+            <div className=" 
                 row-span-1 
                 p-[30px]
                 pb-[70px]

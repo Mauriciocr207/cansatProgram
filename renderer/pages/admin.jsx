@@ -5,7 +5,6 @@ import Link from "next/link";
 import { SelectConnectPort } from "../components/home/selectConnectPort";
 import { PanelSection } from "../components/home/panelSection";
 import { ToggleThemeButton } from "../components/toggleThemeButton";
-import { Frase } from "../components/frase";
 
 function Home() {
   return (
@@ -26,29 +25,28 @@ function Home() {
               {/* THEME */}
               <ToggleThemeButton/>
               {/* HOME */}
-              <Link href="/home">
+              <Link href="/Home">
                 <div className="w-full px-[10px] rounded-[10px] grid grid-cols-[30px_1fr] items-center cursor-pointer bg-blue hover:bg-lightBlue  dark:bg-blackDark-4  dark:hover:bg-greyDark-1 text-white transition-color duration-300">
                   <div className="flex justify-center items-center h-full"><FaHome className="w-full h-[50%]"/></div>
                   <p className="pl-[20px] text-left text-[20px] font-bold">Home</p>
                 </div>
               </Link >
               {/* MANAGE DATABASE */}
-              <Link href="/manageDB">
+              <Link href="/Admin">
                 <div className="w-full px-[10px] rounded-[10px] grid grid-cols-[30px_1fr] items-center cursor-pointer bg-lightBlue hover:bg-lightBlue  dark:hover:bg-greyDark-1 text-white transition-color duration-300">
                   <div className="flex justify-center items-center h-full"><FaDatabase className="w-full h-[50%]"/></div>
-                  <p className="pl-[20px] text-left text-[20px] font-bold">Manage Database</p>
+                  <p className="pl-[20px] text-left text-[20px] font-bold">Admin Panel</p>
                 </div>
               </Link >
             </div>
             {/* Controls */}
             <div className="bg-white shadow controls w-full dark:bg-blackDark-2 rounded-[10px] transition-color duration-300 p-[30px] text-white text-center">
-              
             </div>
           </aside>
           {/* Section -> Grafics */}
           <section
             className="row-span-1 col-span-1 rounded-[10px] overflow-y-auto relative transition-color duration-300 ">
-            {/* <PanelSection /> */}
+            <PanelSection />
           </section>
 
           {/* Footer -> Messages to Arduino */}

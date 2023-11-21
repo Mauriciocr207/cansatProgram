@@ -1,10 +1,7 @@
-import {
-  screen,
-  BrowserWindow,
-} from 'electron';
+import { screen, BrowserWindow } from 'electron';
 import Store from 'electron-store';
 
-export default function createWindow(windowName, options) {
+export function createWindow(windowName, options) {
   const key = 'window-state';
   const name = `window-state-${windowName}`;
   const store = new Store({ name });
@@ -80,3 +77,6 @@ export default function createWindow(windowName, options) {
 
   return win;
 };
+
+const _default = createWindow;
+export { _default as default };

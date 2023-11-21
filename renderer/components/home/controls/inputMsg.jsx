@@ -1,11 +1,11 @@
 import { ipcRenderer } from "electron"
 import { useEffect, useState } from "react"
 
-export function Frase() {
+export function InputMsg() {
     const connection = 1; // conexión de la carga primaria
     const [msg, setMsg] = useState('');
     function sendMessage() {
-        ipcRenderer.send('Arduino:data', {idConnection: connection, message: msg});
+        ipcRenderer.send('arduino:data', {idConnection: connection, message: msg});
     }
     function setFrase(event) {
         setMsg(event.target.value);

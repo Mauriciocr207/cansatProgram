@@ -1,12 +1,8 @@
 // Módulos de electron
 import { app, ipcMain, BrowserWindow } from 'electron';
 import serve from 'electron-serve';
-import { Connection } from '../serialPort/serialPort';
-import createWindow from './helpers/create-window';
-
-
-
-const connections = {}
+import {createWindow} from './helpers/create-window';
+import { SerialManager } from './Serial/SerialManager';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -17,7 +13,7 @@ if (isProd) {
 }
 
 
-
+const serialManager = new SerialManager();
 app.whenReady()
     .then(() => {
       const win = createWindow('main', {
@@ -47,46 +43,50 @@ app.whenReady()
       // MacOS
       app.on('activate', () => (BrowserWindow.getAllWindows().length === 0) ? createWindow() : false);
       // Events
-      ipcMain.on('wantToOpenConnection', (event, data) => {
-        const dataPort = `${data.port}`.split(" ").join(""); // Se limpia el string el puerto de espacios
-        if( !connections.hasOwnProperty( `connection_${data.id}` ) ) connections[`connection_${data.id}`] = new Connection(dataPort);
-        const connection = connections[`connection_${data.id}`];
-        function closePort(con) {
-          con.port.close( err => {
-            if (err) console.log("Cant close port", err.message);
-            else {
-              console.log("Port closed");
-              sendData(`openedConnection_${data.id}`, false);
-            }
-        });
-        }
-          // Se cierra la conexión antes de abrir otra
-          if(connection.port.isOpen) {
-              closePort(connection);
-          } else {
-            // Se crea puerto serial y se abre la conexión
-            closePort(connection);
-            connection.createSerialPort(dataPort);
-            connection.port.open( function (err) {
-                if (err) {
-                    console.log(`Error opening port on connection_${data.id} ->`, err.message);
-                    sendData(`openedConnection_${data.id}`, false);
-                }
-                else {
-                    console.log("Port connected");
-                    sendData(`openedConnection_${data.id}`, true);
-                }
+      ipcMain.on('serial:connection:open',  (event, data) => {
+        const {port, id} = data;
+        console.log(`abriendo puerto: ${port}`);
+        serialManager.getConnection(port).open()
+          .then(() => {
+            console.log("se abrió el puerto: ", port);
+            sendData(`serial:connection:open:${id}`, {
+              status: true,
+              port: port,
+              message: "connected port",
             });
-          };         
+          })
+          .catch((err) => {
+            console.log(`${port} ${err}`);
+            sendData(`serial:connection:open:${id}`, {
+              status: false,
+              port: port,
+              message: err,
+            });
+          });
       });
-      ipcMain.on('Arduino:data', (event,data) => {
-        const {idConnection} = data;
-        const connection = connections[`connection_${idConnection}`];
-        if(connection !== undefined) {
-          const port = connection.port;
-          const msg = data.message;
-          port.write(Buffer.from(msg));
-        }
+      ipcMain.on('serial:connection:close', (event, data) => {
+        const {port, id} = data;
+        console.log(`cerrando puerto: ${port}`);
+        serialManager.getConnection(port).close()
+          .then(() => {
+            console.log("puerto cerrado: ", port);
+            sendData(`serial:connection:close:${id}`, {
+              status: true,
+              port: port,
+              message: "closed port",
+            });            
+          })
+          .catch((err) => {
+            console.log(`${port} ${err}`, );
+            sendData(`serial:connection:close:${id}`, {
+              status: false,
+              port: port,
+              message: err,
+            });           
+          });    
+      });
+      ipcMain.on('arduino:data', (event,data) => {
+        // 
       })
     })
     .catch( err => {
