@@ -8,7 +8,7 @@ export function Orientation({props}) {
     const pi = 3.14159;
     const [angs, setAngs] = useState({x: 0, y: 0, z: 0});
     useEffect(() => {
-        ipcRenderer.on('Arduino:data', (event, data) => {
+        ipcRenderer.on('arduino:data', (event, data) => {
             const {ang_x, ang_y, ang_z} = data;
             if(ang_x * ang_y * ang_z != NaN) {
                 setAngs({
@@ -22,21 +22,11 @@ export function Orientation({props}) {
     return <>
         <div className='w-full h-full rounded-lg overflow-hidden'>
             <Canvas shadows camera={{position:[10,10,30]}}>
-                
                 <pointLight position={[10,10,30]} />
                 <pointLight position={[10,20,30]} />
                 <pointLight position={[10,-20,30]} intensity={0.5} />
                 <axesHelper args={[20]} />
-                {/* <mesh
-                    rotation-x={angulos.x}2
-                    rotation-y={angulos.y}
-                    rotation-z={angulos.z}
-                >
-                    <meshStandardMaterial wireframe/>
-                </mesh> */}
-                <Cansat rotation = {[angs.x, angs.z, -angs.y]}
-                    position={[0,0,0]}
-                />
+                <Cansat rotation = {[angs.x, angs.z, -angs.y]} position={[0,0,0]} />
                 <Environment preset="sunset" background blur={10} />
                 <OrbitControls />
             </Canvas>

@@ -1,6 +1,4 @@
-// Model
-import { Measurement } from '../Models/Measurement';
-// Conexión Serial
+import { Measurement } from '../Models/measurement';
 import { BrowserWindow } from 'electron';
 import { SerialPort, DelimiterParser } from 'serialport';
 
@@ -27,7 +25,7 @@ export class SerialPortConnection {
                     try {
                         jsonData = JSON.stringify(data);                                        // Convert to JSON
                         jsonData = JSON.parse(data);                                            // Convert to JS object
-                        Measurement.save(jsonData);
+                        console.log(jsonData);
                         BrowserWindow.fromId(1).webContents.send('arduino:data', jsonData);     // Send to principal window
                     } catch (err) {
                         console.log(`${err.message} : ${jsonData}`); 

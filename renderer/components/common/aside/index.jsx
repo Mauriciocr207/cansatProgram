@@ -18,7 +18,7 @@ export function Aside({children}) {
                     </div>
                 </Link >
                 {/* Admin panel */}
-                <Link href="/manageDB">
+                <Link href="/admin">
                     <div className="w-full px-[10px] rounded-[10px] grid grid-cols-[30px_1fr] items-center cursor-pointer bg-blue hover:bg-lightBlue  dark:hover:bg-greyDark-1 text-white transition-color duration-300">
                     <div className="flex justify-center items-center h-full"><FaDatabase className="w-full h-[50%]"/></div>
                     <p className="pl-[20px] text-left text-[20px] font-bold">Manage Database</p>

@@ -1,116 +1,69 @@
+'use strict';
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../Database/InitDb.js';
-/**
- * Create a class Measurement that extends from sequelize Model
- */
+
 class Measurement extends Model {
-    static async save(object) {
-        const {time, temperatura, presion, humedad, velocidad} = object;
-        try {
-            await this.create({
-                time,
-                temperatura,
-                presion,
-                humedad,
-                velocidad
-            });
-            console.log('Guardado correctamente');
-        } catch (error) {
-            console.log('error al subir los datos', error);
-        }
+  /**
+   * Helper method for defining associations.
+   * This method is not a part of Sequelize lifecycle.
+   * The `models/index` file will call this method automatically.
+   */
+  static associate(models) {
+    // define association here
+  }
+  /**
+   * 
+   * @param {Object} measurement to insert
+   */
+  static async save(measurement) {
+    const {time, temperatura, presion, humedad, velocidad} = measurement;
+    try {
+        await this.create({
+            time,
+            temperatura,
+            presion,
+            humedad,
+            velocidad
+        });
+        console.log('Guardado correctamente');
+    } catch (error) {
+        console.log('error al subir los datos', error);
     }
-    static async getAll(field){
-        try {
-            const project =  await this.findAll({
-                attributes:[field]
-            })
-            console.log(project);
-        } catch (error) {
-            console.log('No se encuentra en la base de datos', error);
-        }
-    };
+  }
+  /**
+   * 
+   * @param {int} field   field to search
+   */
+  static async getAll(field){
+      try {
+          const project =  await this.findAll({
+              attributes:[field]
+          })
+          console.log(project);
+      } catch (error) {
+          console.log('No se encuentra en la base de datos', error);
+      }
+  };
 }
-/**
- * Initialize the Model Measurement
- */
 Measurement.init({
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    time:{
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-    temperatura:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    presion:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    humedad:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    velocidad:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    longitud:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    latitud:{
-        type: DataTypes.FLOAT, 
-        allowNull: true, 
-    },
-    altitud:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    accelX:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    accelY:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    accelZ:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    yaw:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    pitch:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },
-    roll:{
-        type: DataTypes.FLOAT,
-        allowNull: true,
-    },   
-},
-{
-    sequelize: sequelize,
-    timestamps: false,
+  tiempo: DataTypes.INTEGER,
+  temperatura: DataTypes.FLOAT,
+  presion: DataTypes.FLOAT,
+  humedad: DataTypes.FLOAT,
+  velocidad: DataTypes.FLOAT,
+  longitud: DataTypes.FLOAT,
+  latitud: DataTypes.FLOAT,
+  altitud: DataTypes.FLOAT,
+  accelX: DataTypes.FLOAT,
+  accelY: DataTypes.FLOAT,
+  accelZ: DataTypes.FLOAT,
+  yaw: DataTypes.FLOAT,
+  pitch: DataTypes.FLOAT,
+  roll: DataTypes.FLOAT
+}, {
+  sequelize,
+  timestamps: false,
+  modelName: 'Measurement',
 });
 
-/**
- * Syncronize with database
- */
-Measurement.sync({force:true})
-    .then(() => {
-        console.log("Measurement table created");
-        // create the first register
-        Measurement.create({time: Date.now()});
-    })
-    .catch(error => console.error("Error creating measurement table: ", error));
-export {
-    Measurement
-};
+export {Measurement};
