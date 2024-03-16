@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "my-nextron-app",
+  "name": "cansat",
   "description": "My application description",
   "version": "1.0.0",
   "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
@@ -19,7 +19,7 @@
     "@react-three/drei": "^9.64.0",
     "@react-three/fiber": "^8.12.0",
     "@types/three": "^0.150.1",
-    "chart.js": "^4.2.1",
+    "chart.js": "^4.4.1",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
     "kalmanjs": "^1.1.0",

@@ -1,6 +1,3 @@
-import { ipcRenderer } from "electron";
-import { useEffect } from "react";
-
 export function Graphic({onMouseOver, Children, titulo}) {
     return(
         <>

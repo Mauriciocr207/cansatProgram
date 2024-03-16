@@ -45,6 +45,7 @@ class Measurement extends Model {
       }
   };
 }
+
 Measurement.init({
   tiempo: DataTypes.INTEGER,
   temperatura: DataTypes.FLOAT,

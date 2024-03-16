@@ -1,52 +1,98 @@
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-import {Line} from 'react-chartjs-2'
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
+const options = {
+  maintainAspectRatio: false, // Don't maintain w/h ratio
+  scales: {
+    y:
+      {
+        // min: 0,
+        // max: 1000,
+        // stepSize: 5,
+      },
+    x:
+      {
+        
+      },
+  },
+};
+
+function getData() {
+  const labels = [];
+  for (let i = 1; i <= 15; i++) {
+       labels.push(i);
+  }
+  return labels;
+}
+
+function getValues() {
+  const values = [];
+  for (let i = 1; i <= 15; i++) {
+       values.push(0);
+  }
+  return values;
+}
 
 export function Presion() {
-    const data = {
-        labels: [
-            '10/04/2018', '10/05/2018',
-            '10/06/2018', '10/07/2018', 
-            '10/08/2018', '10/09/2018', 
-            '10/10/2018', '10/11/2018', 
-            '10/12/2018', '10/13/2018', 
-            '10/14/2018', '10/15/2018',
-            '10/16/2018'
-          ],
-          datasets: [
-            {
-              label: 'Temperature',
-              data: [22,19,27,23,22,24,17,25,23,24,20,19, 22],
-              fill: false,          // Don't fill area under the line
-              borderColor: '#3A98B9',  // Line color
-            }
-          ]
-    }
+  const [chartData, setChartData] = useState({
+    labels: getData(),
+    datasets: [
+      {
+        label: "Temperature",
+        data: getValues(),
+        fill: false, // Don't fill area under the line
+        borderColor: "#3A98B9", // Line color
+      },
+    ],
+  });
+  function updateData() {
+    setChartData(prevChartData => {
+      const {datasets, labels} = prevChartData;
+      const {data} = datasets[0];
+      const newData = [...data.slice(1), Math.random() * 10];
+      console.log(newData);
+      return {
+        ...prevChartData,
+        // labels: []
 
-    const options = {
-        maintainAspectRatio: false	// Don't maintain w/h ratio
+    
+        datasets: [{
+          ...prevChartData.datasets[0],
+          data: newData
+        }]
       }
+    })
+  }
+  
+  useEffect(() => {
+    setInterval(() => {
+      updateData();
+    }, 1000);
+  }, []);
 
-    return <>
-        <Line data={data} options={options}/>
+  return (
+    <>
+      <Line data={chartData} options={options} />
     </>
+  );
 }
