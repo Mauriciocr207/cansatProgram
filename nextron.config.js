@@ -1,8 +1,10 @@
 module.exports = {
+  mainSrcDir: './src/main',
+  rendererSrcDir: './src/renderer',
   webpack: (defaultConfig, env) =>
     Object.assign(defaultConfig, {
       entry: {
-        background: './main/app.js',
+        background: './src/main/app.js',
       },
     }),
 };

@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "loggin": true,
+    "database": "CANSAT",
+    "host": "./src/main/Database/data/host.sqlite",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "loggin": true,
+    "database": "CANSAT",
+    "host": "./src/main/Database/data/host.sqlite",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "loggin": false,
+    "database": "CANSAT",
+    "host": "./src/main/Database/data/host.sqlite",
+    "dialect": "sqlite"
+  }
+}
