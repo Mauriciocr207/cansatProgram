@@ -16,6 +16,8 @@
     "build:linux": "nextron build --linux"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.3",
     "@react-three/drei": "^9.64.0",
     "@react-three/fiber": "^8.12.0",
     "@rehooks/component-size": "^1.0.3",

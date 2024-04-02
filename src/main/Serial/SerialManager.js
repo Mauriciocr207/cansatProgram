@@ -2,7 +2,7 @@ import { SerialPortConnection } from "./SerialPortConnection";
 
 export class SerialManager {
     errMsg = null;
-    connections = {};    
+    connections = {};
     /**
      * 
      * @param {*} port 

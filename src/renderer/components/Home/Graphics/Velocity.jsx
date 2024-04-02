@@ -7,10 +7,13 @@ const option = {
   series: [
     {
       type: 'gauge',
+      center: ['50%', '70%'],
       min: 0,
-      max: 100,
-      splitNumber: 10,
-      radius: '75%',
+      max: 60,
+      splitNumber: 6,
+      startAngle: 200,
+      endAngle: -20,
+      radius: '100%',
       animation: false,
       axisLine: {
         lineStyle: {
@@ -19,23 +22,23 @@ const option = {
         }
       },
       splitLine: {
-        distance: -20,
-        length: 15,
+        distance: -12,
+        length: 12,
         lineStyle: {
           color: '#f00'
         }
       },
       axisTick: {
-        distance: -12,
-        length: 10,
+        distance: -8,
+        length: 5,
         lineStyle: {
           color: '#f00'
         }
       },
       axisLabel: {
-        distance: -30,
+        distance: -23,
         color: '#f00',
-        fontSize: 15
+        fontSize: 10
       },
       anchor: {
         show: true,
@@ -53,26 +56,24 @@ const option = {
           color: '#000'
         }
       },
-      title: {
-        offsetCenter: [0, '-30%']
+      // title: {offsetCenter: [0, '-10%']},
+      detail: {
+        fontSize: 15,
+        formatter: '{value} m/s',
+
       },
-      // detail: {
-      //   // fontSize: 20,
-      //   // formatter: '{value} m/s',
-      // },
-      data: [
-        {
-          value: 58.46,
-          name: 'm/s'
-        }
-      ]
+      data: [{value: 12, name: ''}]
     },
     {
       type: 'gauge',
+      center: ['50%', '70%'],
       min: 0,
       max: 60,
       splitNumber: 6,
-      radius: "65%",
+      startAngle: 200,
+      endAngle: -20,
+      animation: false,
+      radius: "90%",
       axisLine: {
         lineStyle: {
           color: [[1, '#000']],
@@ -95,7 +96,7 @@ const option = {
       },
       axisLabel: {
         distance: 10,
-        fontSize: 15,
+        fontSize: 10,
         color: '#000'
       },
       pointer: {
@@ -138,23 +139,15 @@ export function Velocity() {
         height: size.height
       });
     }
-    ipcRenderer.on('arduino:data', (e, {giro}) => {
-      const vel = giro[0];
+  }, [size]);
+
+  useEffect(() => {
+    ipcRenderer.on('arduino:data', (e, {vel}) => {
       echarts.getInstanceByDom(chart.current).setOption({
-        series: [
-          {
-            type: 'gauge',
-            data: [
-              {
-                value: vel,
-                name: 'Velocidad'
-              }
-            ]
-          }
-        ]
+        series: [{type: 'gauge', data: [{value:vel}]}]
       });
     })
-  }, [size]);
+  }, []);
 
   return (
     <div

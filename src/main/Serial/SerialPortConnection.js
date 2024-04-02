@@ -14,12 +14,12 @@ export class SerialPortConnection {
         });
         const parse = this.serial.pipe(new DelimiterParser({ delimiter: '\n' }));
         parse.on('data', (data) => {
-            let jsonData = data.toString();                                                 //Convert to string
+            let jsonData = data.toString();                                          //Convert to string
             try {
                 jsonData = jsonData.replace(/\r?\n|\r/g, "");                               //remove '\r' from this String
                 jsonData = JSON.stringify(data);                                        // Convert to JSON
                 jsonData = JSON.parse(data);                                            // Convert to JS object
-                this.saveOnDB(jsonData);
+                // this.saveOnDB(jsonData);
                 this.sendToWindow(1, jsonData);
             } catch (err) {
                 console.log(`${err.message} : ${jsonData}`); 

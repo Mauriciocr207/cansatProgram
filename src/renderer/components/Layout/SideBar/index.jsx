@@ -2,7 +2,7 @@ import { FaHome, FaDatabase } from "react-icons/fa";
 import Link from "next/link";
 import { ThemeBtn } from "./themeBtn";
 
-export function SideBar({children, className}) {
+export function Sidebar({children, className}) {
     return (<>
         <aside className={className}>
             {/* Navigation */}

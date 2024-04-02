@@ -1,75 +1,19 @@
 import { useState } from 'react';
-import { Graphic } from './GraphicLayout';
-import { Presion } from './Presion';
-import { Temperatura } from './Temperatura';
+import { PTA } from './PTA';
 import { Velocity } from './Velocity';
 import { Orientation } from './Orientation/index';
-import { Altitude } from './Altitude';
-import { Posicion } from './Posicion';
+import { Position } from './Position';
+import { Aceleration } from './Aceleration';
 
 export function Graphics() {
-    const Grafics = [
-      { grafic: <Presion/>, color: "bg-[#4318F5]", titulo: "Presión"},
-      { grafic: <Temperatura/>, color: "bg-[#18F5A7]", titulo: "Temperatura"},
-      { grafic: <Orientation/>, color: "bg-[#F52E00]", titulo: "Orientación" },
-      { grafic: <Velocity/>, color: "bg-[#F59200]", titulo: "Velocidad"},
-      { grafic: <Altitude/>, color: "bg-[#F5DB0C]", titulo: "Altitud"},
-      { grafic: <Posicion/>, color: "bg-[#F87030]", titulo: "Presión"}
-    ];
-    const [sectionBgColor, setSectionBgColor] = useState("bg-[#ffffff]");
-
     return (
         <>
-          <div className={`
-            bg-sectionDark
-            w-full 
-            h-full
-            ${sectionBgColor.toString()}
-            transition-color
-            duration-500
-          `}>
-            <div className={
-              ` bg-white
-                shadow
-                dark:bg-[rgb(0,0,0,0)]
-                h-full 
-                grid
-                grid-rows-[1fr]
-                grid-cols-1 
-                transition-color
-                duration-300
-                `
-          }>
-              <div className='
-                  px-[32px] 
-                  py-[24px]
-                  grid
-                  grid-rows-2 
-                  grid-cols-3 
-                  gap-x-[24px] 
-                  gap-y-[12px]                  
-                  overflow-y-auto
-                  max-[1400px]:grid
-                  max-[1400px]:grid-rows-[300px_300px_300px]
-                  max-[1400px]:grid-cols-2
-                  max-[1010px]:flex
-                  max-[1010px]:basis-full
-                  max-[1010px]:flex-wrap
-                  max-[1010px]:items-center
-                  scroll
-                  
-              '>
-                    {
-                      Grafics.map( e => <Graphic
-                        key={e.color} onMouseOver={ () => {
-                            setSectionBgColor(e.color);
-                        }} 
-                        Children={e.grafic}
-                        titulo={e.titulo}/>
-                      )
-                    }                    
-              </div>
-            </div>
+          <div className='w-full gap-2 grid grid-cols-[repeat(12,1fr)] grid-rows-[repeat(2,10rem)_repeat(3,15rem)] md:grid-rows-[10rem_15rem_20rem] lg:grid-rows-[13rem_24rem]'>
+            <div className='bg-white dark:bg-slate-800 p-2 w-full h-full rounded-lg col-span-12 md:col-span-6 lg:col-span-4'><Position/></div>
+            <div className='bg-white dark:bg-slate-800 p-2 w-full h-full rounded-lg col-span-12 md:col-span-6 lg:col-span-4'><Velocity/></div>
+            <div className='bg-white dark:bg-slate-800 p-2 w-full h-full rounded-lg col-span-12 md:col-span-6 lg:col-span-4'><Aceleration/></div>
+            <div className='bg-white dark:bg-slate-800 w-full h-full rounded-lg col-span-12 md:col-span-6 lg:col-span-5'><Orientation/></div>
+            <div className='bg-white dark:bg-slate-800 p-2 w-full h-full rounded-lg col-span-12 md:col-span-12 lg:col-span-7'><PTA/></div>
           </div>
         </>
     )

@@ -4,17 +4,11 @@
 
 
 @layer base {
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    html {
+        /* font-feature-settings: "csv02","cv03","cv04","cv11"; */
     }
-    @font-face {
-        font-family: 'Roboto Mono', monospace;
-        src: url('../fonts/fonts/RobotoMono-VariableFont_wght.ttf') format('ttf');
-    }
-    body, * {
-        font-family: 'Roboto Mono', monospace;
+    body * {
+        transition: color .2s ease, background-color .3s ease;
     }
 }
 

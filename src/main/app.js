@@ -20,7 +20,7 @@ app.whenReady()
         backgroundColor: '#121212',
         width: 1500,
         height: 800,
-        titleBarStyle: 'hidden',
+        // titleBarStyle: 'hidden',
         titleBarOverlay: {
             color: '#000000',
             symbolColor: '#ffffff',
@@ -46,11 +46,9 @@ app.whenReady()
       );
 
       // Events
-      ipcMain.on("serial:connection:open", ipcMainHandler.serialConnectionOpen);
-      ipcMain.on("serial:connection:close", ipcMainHandler.serialConnectionClose);
-      ipcMain.on("arduino:data", (event, data) => {
-        //
-      });
+      ipcMain.on("serial:open", ipcMainHandler.serialConnectionOpen);
+      ipcMain.on("serial:close", ipcMainHandler.serialConnectionClose);
+      ipcMain.on("serial:list-ports", ipcMainHandler.serialListPorts);
     })
     .catch((err) => {
       console.log(err);
