@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './src/renderer/pages/**/*.{js,ts,jsx,tsx}',
     './src/renderer/components/**/*.{js,ts,jsx,tsx}',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {
@@ -12,5 +13,7 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 };

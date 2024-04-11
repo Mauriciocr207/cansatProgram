@@ -4,3 +4,4 @@ node_modules
 app
 dist
 .env
+src/main/Database/data/cansat_db.sqlite

@@ -4,7 +4,7 @@
     "password": null,
     "loggin": true,
     "database": "CANSAT",
-    "host": "./src/main/Database/data/host.sqlite",
+    "host": "./src/main/Database/data/cansat_db.sqlite",
     "dialect": "sqlite"
   },
   "test": {
@@ -12,7 +12,7 @@
     "password": null,
     "loggin": true,
     "database": "CANSAT",
-    "host": "./src/main/Database/data/host.sqlite",
+    "host": "./src/main/Database/data/cansat_db.sqlite",
     "dialect": "sqlite"
   },
   "production": {
@@ -20,7 +20,7 @@
     "password": null,
     "loggin": false,
     "database": "CANSAT",
-    "host": "./src/main/Database/data/host.sqlite",
+    "host": "./src/main/Database/data/cansat_db.sqlite",
     "dialect": "sqlite"
   }
 }

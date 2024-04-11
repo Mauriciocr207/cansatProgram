@@ -28,6 +28,7 @@
     "echarts-for-react": "^3.0.2",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
+    "flowbite": "^2.3.0",
     "kalmanjs": "^1.1.0",
     "react-chartjs-2": "^5.2.0",
     "react-icons": "^4.8.0",

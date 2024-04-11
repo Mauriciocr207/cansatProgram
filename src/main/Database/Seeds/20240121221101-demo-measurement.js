@@ -5,25 +5,24 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const maxMeasurements = 20;
     function generateRandomFloat() {
-      return Math.random() * 100;
+      return (Math.random() * 100).toFixed(2);
     }
     const measurements = [];
     for (let i = 1; i <= maxMeasurements; i++) {
       measurements.push({
-        tiempo: generateRandomFloat(),
-        temperatura: generateRandomFloat(),
-        presion: generateRandomFloat(),
-        humedad: generateRandomFloat(),
-        velocidad: generateRandomFloat(),
-        longitud: generateRandomFloat(),
-        latitud: generateRandomFloat(),
-        altitud: generateRandomFloat(),
-        accelX: generateRandomFloat(),
-        accelY: generateRandomFloat(),
-        accelZ: generateRandomFloat(),
-        yaw: generateRandomFloat(),
-        pitch: generateRandomFloat(),
-        roll: generateRandomFloat(),
+        time: generateRandomFloat(),
+        temperature: generateRandomFloat(),
+        pressure: generateRandomFloat(),
+        velocity: generateRandomFloat(),
+        height : generateRandomFloat(),
+        aceleration: generateRandomFloat(),
+        angle_x: generateRandomFloat(),
+        angle_y: generateRandomFloat(),
+        angle_z: generateRandomFloat(),
+        latitude_cp: generateRandomFloat(),
+        length_cp: generateRandomFloat(),
+        latitude_cs: generateRandomFloat(),
+        length_cs: generateRandomFloat(),
       });
     }
     await queryInterface.bulkInsert("measurements", measurements);

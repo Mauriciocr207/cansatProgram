@@ -9,48 +9,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tiempo: {
-        type: Sequelize.INTEGER
-      },
-      temperatura: {
-        type: Sequelize.FLOAT
-      },
-      presion: {
-        type: Sequelize.FLOAT
-      },
-      humedad: {
-        type: Sequelize.FLOAT
-      },
-      velocidad: {
-        type: Sequelize.FLOAT
-      },
-      longitud: {
-        type: Sequelize.FLOAT
-      },
-      latitud: {
-        type: Sequelize.FLOAT
-      },
-      altitud: {
-        type: Sequelize.FLOAT
-      },
-      accelX: {
-        type: Sequelize.FLOAT
-      },
-      accelY: {
-        type: Sequelize.FLOAT
-      },
-      accelZ: {
-        type: Sequelize.FLOAT
-      },
-      yaw: {
-        type: Sequelize.FLOAT
-      },
-      pitch: {
-        type: Sequelize.FLOAT
-      },
-      roll: {
-        type: Sequelize.FLOAT
-      },
+      time: {type: Sequelize.INTEGER},
+      temperature: {type: Sequelize.FLOAT},
+      pressure: {type: Sequelize.FLOAT},
+      velocity: {type: Sequelize.FLOAT},
+      height : {type: Sequelize.FLOAT},
+      aceleration: {type: Sequelize.FLOAT},
+      angle_x: {type: Sequelize.FLOAT},
+      angle_y: {type: Sequelize.FLOAT},
+      angle_z: {type: Sequelize.FLOAT},
+      latitude_cp: {type: Sequelize.FLOAT},
+      length_cp: {type: Sequelize.FLOAT},
+      latitude_cs: {type: Sequelize.FLOAT},
+      length_cs: {type: Sequelize.FLOAT},
     });
   },
   async down(queryInterface, Sequelize) {

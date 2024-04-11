@@ -5,7 +5,7 @@ import { Orientation } from './Orientation/index';
 import { Position } from './Position';
 import { Aceleration } from './Aceleration';
 
-export function Graphics() {
+export default function Graphics() {
     return (
         <>
           <div className='w-full gap-2 grid grid-cols-[repeat(12,1fr)] grid-rows-[repeat(2,10rem)_repeat(3,15rem)] md:grid-rows-[10rem_15rem_20rem] lg:grid-rows-[13rem_24rem]'>

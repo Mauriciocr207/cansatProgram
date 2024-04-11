@@ -2,7 +2,7 @@
 import { app, ipcMain, BrowserWindow } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers/create-window";
-import { ipcMainHandler } from "./helpers/ipcMainHandler";
+import { ipcMainController } from "./Controllers/ipcMainController";
 import { sequelize } from "./Database/InitDb";
 
 const isProd = process.env.NODE_ENV === "production";
@@ -14,7 +14,7 @@ if (isProd) {
 }
 
 app.whenReady()
-    .then(() => sequelize.sync({force:true}))
+    .then(() => sequelize.sync(/*{force:true}*/))
     .then(() => {
       const mainWindow = createWindow("main", {
         backgroundColor: '#121212',
@@ -46,9 +46,10 @@ app.whenReady()
       );
 
       // Events
-      ipcMain.on("serial:open", ipcMainHandler.serialConnectionOpen);
-      ipcMain.on("serial:close", ipcMainHandler.serialConnectionClose);
-      ipcMain.on("serial:list-ports", ipcMainHandler.serialListPorts);
+      ipcMain.on("serial:open", ipcMainController.serialConnectionOpen);
+      ipcMain.on("serial:close", ipcMainController.serialConnectionClose);
+      ipcMain.on("serial:list-ports", ipcMainController.serialListPorts);
+      ipcMain.on("db:get-all", ipcMainController.getDbData);
     })
     .catch((err) => {
       console.log(err);

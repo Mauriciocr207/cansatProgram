@@ -54,7 +54,7 @@ const data = {
 
 export function PTA() {
   const [chartData, setChartData] = useState(data);
-  function updateData(temp, presion, altitud) {
+  function updateData(temp, presion, alt) {
     setChartData(prevChartData => {
       const {datasets, labels} = prevChartData;
 
@@ -64,7 +64,7 @@ export function PTA() {
 
       tempData = [...tempData.slice(1), temp];
       presionData = [...presionData.slice(1), presion];
-      altitudData = [...altitudData.slice(1), altitud];
+      altitudData = [...altitudData.slice(1), alt];
 
     
       // console.log(newData);
@@ -82,7 +82,7 @@ export function PTA() {
   useEffect(() => {
     ipcRenderer.on('arduino:data', (e, {pres, temp, alt}) => {
       if(pres, temp, alt) {
-        // updateData(pres, temp);
+        // updateData(pres, tempa, alt);
       }
     })
   }, []);

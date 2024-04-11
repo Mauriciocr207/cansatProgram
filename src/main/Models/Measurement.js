@@ -46,22 +46,21 @@ export default class Measurement extends Model {
 }
 
 Measurement.init({
-  tiempo: DataTypes.INTEGER,
-  temperatura: DataTypes.FLOAT,
-  presion: DataTypes.FLOAT,
-  humedad: DataTypes.FLOAT,
-  velocidad: DataTypes.FLOAT,
-  longitud: DataTypes.FLOAT,
-  latitud: DataTypes.FLOAT,
-  altitud: DataTypes.FLOAT,
-  accelX: DataTypes.FLOAT,
-  accelY: DataTypes.FLOAT,
-  accelZ: DataTypes.FLOAT,
-  yaw: DataTypes.FLOAT,
-  pitch: DataTypes.FLOAT,
-  roll: DataTypes.FLOAT
+  time: DataTypes.INTEGER,
+  temperature: DataTypes.FLOAT,
+  pressure: DataTypes.FLOAT,
+  velocity: DataTypes.FLOAT,
+  height : DataTypes.FLOAT,
+  aceleration: DataTypes.FLOAT,
+  angle_x: DataTypes.FLOAT,
+  angle_y: DataTypes.FLOAT,
+  angle_z: DataTypes.FLOAT,
+  latitude_cp: DataTypes.FLOAT,
+  length_cp: DataTypes.FLOAT,
+  latitude_cs: DataTypes.FLOAT,
+  length_cs: DataTypes.FLOAT,
 }, {
   sequelize,
   timestamps: false,
-  modelName: 'Measurement',
+  modelName: 'measurement',
 });

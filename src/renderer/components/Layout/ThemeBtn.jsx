@@ -11,8 +11,7 @@ export function ThemeBtn({className}) {
             document.documentElement.classList.add("dark");
         } else {
             document.documentElement.classList.remove("dark");
-        }
-        console.log(darkMode);
+        };
     }, [darkMode]);
 
     function handleThemeSwitch() {
